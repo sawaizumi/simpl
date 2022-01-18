@@ -1,0 +1,5 @@
+key	sub-key-00	sub-key-01	sub-key-02	sub-key-03	value	remarks
+target	sheet	id				対象スプレッドシートID
+target	sheet	sheet-name			test	対象シート名
+
+
