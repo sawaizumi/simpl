@@ -76,10 +76,7 @@ __base.LOGGER =
 	_DefaultOptions : 
 		function ( aaOptions )
 		{
-			if ( aaOptions == null )
-			{
-				aaOptions = {};
-			}
+			aaOptions = __base._FUNCTIONS._DefaultOptions( aaOptions );
 
 			aaOptions["Show.LibLog"] = true;
 

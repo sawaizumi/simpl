@@ -44,10 +44,12 @@ const STRING__GAS_PROJECT_NAME = "Tests-SIMPL";
 
 function Tests_All()
 {
+	var eString_Title = "Mode : Tests_G1";
 	var aaOptions = {};
 	aaOptions["Execute._BASE"] = true;
 	aaOptions["Execute._FUNCTIONS"] = true;
-	Main( aaOptions );
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
 }
 
 
@@ -58,39 +60,69 @@ function Tests_Single()
 
 	var aaOptions = {};
 	aaOptions[eString_Execute] = true;
-	Main( aaOptions );
+	aaResults = Main( aaOptions );
+	var eString_Message = "";
+	var eKey;
+	eKey = "OK";
+	eString_Message += "--- OK ---\n";
+	eString_Message += "Total : " + aaResults[eKey]["Count.Total"] + "\n";
+	eString_Message += "Skip : " + aaResults[eKey]["Count.Skip"] + "\n";
+	eString_Message += "Errors : " + aaResults[eKey]["Count.Errors"] + "\n";
+	eString_Message += "\n";
+	eString_Message += ( ( aaResults[eKey]["DateTime.End"].getTime() - aaResults[eKey]["DateTime.Begin"].getTime() ) / 1000 ) + " seconds elapsed.\n";
+	eString_Message += "\n";
+	eString_Message += "\n";
+	eKey = "NG";
+	eString_Message += "--- NG ---\n";
+	eString_Message += "Total : " + aaResults[eKey]["Count.Total"] + "\n";
+	eString_Message += "Skip : " + aaResults[eKey]["Count.Skip"] + "\n";
+	eString_Message += "Errors : " + aaResults[eKey]["Count.Errors"] + "\n";
+	eString_Message += "\n";
+	eString_Message += ( ( aaResults[eKey]["DateTime.End"].getTime() - aaResults[eKey]["DateTime.Begin"].getTime() ) / 1000 ) + " seconds elapsed.\n";
+	eString_Message += "\n";
+	eString_Message += "\n";
+	eString_Message = eString_Message.replaceAll( "\n", '\\n' );
+	Browser.msgBox( eString_Message );
 }
 
 
 function Tests_G1()
 {
+	var eString_Title = "Mode : Tests_G1";
 	var aaOptions = {};
 	aaOptions["Execute._BASE"] = true;
-	Main( aaOptions );
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
 }
 
 
 function Tests_G2()
 {
-Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( "Tests_G2" ) );
+	var eString_Title = "Mode : Tests_G2";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 	var aaOptions = {};
-	Main( aaOptions );
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
 }
 
 
 function Tests_G3()
 {
-Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( "Tests_G3" ) );
+	var eString_Title = "Mode : Tests_G3";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 	var aaOptions = {};
-	Main( aaOptions );
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
 }
 
 
 function Tests_G4()
 {
-Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( "Tests_G4" ) );
+	var eString_Title = "Mode : Tests_G4";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 	var aaOptions = {};
-	Main( aaOptions );
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
 }
 
 
@@ -117,6 +149,7 @@ function Main( aaOptions )
 
 //	var aaConfigurations = SIMPL.CONFIGURATION.GetConfigurations( aaArguments );
 	var aaConfigurations = {};
+	var aaResults = {}
 
 	// Setup
 	local_Setup( aaConfigurations );
@@ -131,6 +164,7 @@ function Main( aaOptions )
 	local_Check_OK( aaConfigurations, aaOptions );
 
 	SIMPL.TEST.ShowResults.End();
+	aaResults["OK"] = SIMPL.TEST.ShowResults.Get();
 
 	// NG
 	SIMPL.LOGGER.AddLog( "// *******************************************************************" );
@@ -144,9 +178,12 @@ function Main( aaOptions )
 	local_Check_NG( aaConfigurations, aaOptions );
 
 	SIMPL.TEST.ShowResults.End();
+	aaResults["NG"] = SIMPL.TEST.ShowResults.Get();
 
 	// Teardown
 	local_Teardown();
+
+	return aaResults;
 }
 
 
@@ -224,6 +261,26 @@ function local_Check_NG( aaConfigurations, aaOptions )
 	{
 		SIMPL.LOGGER.AddLog( "Check - " + eString_Execute );
 		TEST.SIMPL._FUNCTIONS.Check_NG();
+	}
+}
+
+
+// -------------------------------------------------------------------
+// show
+
+function local_ShowErrors( aaResults, eString_Title )
+{
+	var iCount_Errors = 0;
+	iCount_Errors += aaResults["OK"]["Count.Errors"];
+	iCount_Errors += aaResults["NG"]["Count.Total"] - aaResults["NG"]["Count.Errors"];
+	if ( iCount_Errors > 0 )
+	{
+		var eString_Message = "";
+		eString_Message += eString_Title + "\n";
+		eString_Message += iCount_Errors;
+		eString_Message += " Erros.";
+		eString_Message = eString_Message.replaceAll( "\n", '\\n' );
+		Browser.msgBox( eString_Message );
 	}
 }
 

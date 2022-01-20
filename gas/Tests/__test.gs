@@ -22,8 +22,8 @@
 // class
 // -------------------------------------------------------------------
 
-var __base = __base || {};
-__base.TEST = 
+var SIMPL = SIMPL || {};
+SIMPL.TEST = 
 {
 	// ---------------------------------------------------------------
 	// member
@@ -44,14 +44,15 @@ __base.TEST =
 	Setup : 
 		function ( aaOptions )
 		{
-			__base.TEST.m_iCount_Errors = 0;
-			__base.TEST.m_iCount_Skip = 0;
-			__base.TEST.m_iCount_Total = 0;
-			__base.TEST.m_bFlag_CheckNG = __base.GetValue( aaOptions, "Check.NG" );
-			__base.TEST.m_bFlag_ShowDetail = __base.GetValue( aaOptions, "Show.Detail" );
-			__base.TEST.m_bFlag_ShowRealTime = __base.GetValue( aaOptions, "Show.RealTime", true );
-			__base.TEST.m_eDateTime_Begin = new Date();
-			__base.TEST.m_arErrors = [];
+			SIMPL.TEST.m_iCount_Errors = 0;
+			SIMPL.TEST.m_iCount_Skip = 0;
+			SIMPL.TEST.m_iCount_Total = 0;
+			SIMPL.TEST.m_bFlag_CheckNG = SIMPL.GetValue( aaOptions, "Check.NG" );
+			SIMPL.TEST.m_bFlag_ShowDetail = SIMPL.GetValue( aaOptions, "Show.Detail" );
+			SIMPL.TEST.m_bFlag_ShowRealTime = SIMPL.GetValue( aaOptions, "Show.RealTime", true );
+			SIMPL.TEST.m_eDateTime_Begin = new Date();
+			SIMPL.TEST.m_eDateTime_End = new Date();
+			SIMPL.TEST.m_arErrors = [];
 		},
 
 
@@ -60,33 +61,48 @@ __base.TEST =
 			Begin : 
 				function ()
 				{
-					__base.TEST._AddLog( "\n" );
+					SIMPL.TEST._AddLog( "\n" );
 				},
 
 
 			End : 
 				function ()
 				{
-					__base.TEST._AddLog( "\n" );
-					__base.TEST._AddLog( "// ===================================================================\n" );
-					if ( __base.TEST.m_bFlag_CheckNG )
+					SIMPL.TEST._AddLog( "\n" );
+					SIMPL.TEST._AddLog( "// ===================================================================\n" );
+					if ( SIMPL.TEST.m_bFlag_CheckNG )
 					{
-						if ( __base.TEST.m_iCount_Total != __base.TEST.m_iCount_Errors )
+						if ( SIMPL.TEST.m_iCount_Total != SIMPL.TEST.m_iCount_Errors )
 						{
-							__base.TEST._AddLog( "!!! not equal error count...\n" );
+							SIMPL.TEST._AddLog( "!!! not equal error count...\n" );
 						}
 					}
 
-					__base.TEST._AddLog( "Total : " + __base.TEST.m_iCount_Total + "\n" );
-					__base.TEST._AddLog( "Skip : " + __base.TEST.m_iCount_Skip + "\n" );
-					__base.TEST._AddLog( "Errors : " + __base.TEST.m_iCount_Errors + "\n" );
-					__base.TEST._AddLog( "\n" );
-					var eDateTime_Now = new Date();
-					__base.TEST._AddLog( "" + ( ( eDateTime_Now.getTime() - __base.TEST.m_eDateTime_Begin.getTime() ) / 1000 ) + " seconds elapsed.\n" );
+					SIMPL.TEST._AddLog( "Total : " + SIMPL.TEST.m_iCount_Total + "\n" );
+					SIMPL.TEST._AddLog( "Skip : " + SIMPL.TEST.m_iCount_Skip + "\n" );
+					SIMPL.TEST._AddLog( "Errors : " + SIMPL.TEST.m_iCount_Errors + "\n" );
+					SIMPL.TEST._AddLog( "\n" );
+					SIMPL.TEST.m_eDateTime_End = new Date();
+					SIMPL.TEST._AddLog( "" + ( ( SIMPL.TEST.m_eDateTime_End.getTime() - SIMPL.TEST.m_eDateTime_Begin.getTime() ) / 1000 ) + " seconds elapsed.\n" );
 
-					__base.TEST._AddLog( "\n" );
-					__base.TEST._AddLog( "\n" );
+					SIMPL.TEST._AddLog( "\n" );
+					SIMPL.TEST._AddLog( "\n" );
 				},
+
+
+			Get : 
+				function ()
+				{
+					var aaResults = {};
+
+					aaResults["Count.Total"] = SIMPL.TEST.m_iCount_Total;
+					aaResults["Count.Skip"] = SIMPL.TEST.m_iCount_Skip;
+					aaResults["Count.Errors"] = SIMPL.TEST.m_iCount_Errors;
+					aaResults["DateTime.Begin"] = SIMPL.TEST.m_eDateTime_Begin;
+					aaResults["DateTime.End"] = SIMPL.TEST.m_eDateTime_End;
+
+					return aaResults
+				}
 
 
 		},
@@ -112,11 +128,11 @@ __base.TEST =
 		{
 			var e = aaOptions["Error"];
 			var aaArguments = aaOptions["Arguments"];
-			var iOffset = __base.GetValue( aaOptions, "Offset", 2 );
+			var iOffset = SIMPL.GetValue( aaOptions, "Offset", 2 );
 			var arLocations = [];
 
 			var arCalls = e.stack.split( " at " );
-			if ( __base.IsArray( arCalls ) )
+			if ( SIMPL.IsArray( arCalls ) )
 			{
 				for ( const eString of arCalls )
 				{
@@ -138,15 +154,15 @@ __base.TEST =
 			aaOptions["e.message"] = e.message;
 			aaOptions["e.stack"] = e.stack;
 			aaOptions["Offset"] = iOffset;
-			aaOptions["Location"] = __base.GetValue( arLocations, iOffset, [ "-", e.stack ] );
-			__base.TEST.m_iCount_Errors++;
-			__base.TEST.m_arErrors.push( aaOptions );
+			aaOptions["Location"] = SIMPL.GetValue( arLocations, iOffset, [ "-", e.stack ] );
+			SIMPL.TEST.m_iCount_Errors++;
+			SIMPL.TEST.m_arErrors.push( aaOptions );
 
-			if ( __base.TEST.m_bFlag_ShowRealTime )
+			if ( SIMPL.TEST.m_bFlag_ShowRealTime )
 			{
-				if ( __base.TEST.m_bFlag_ShowDetail )
+				if ( SIMPL.TEST.m_bFlag_ShowDetail )
 				{
-					__base.TEST._AddLog( aaOptions );
+					SIMPL.TEST._AddLog( aaOptions );
 				}
 				else
 				{
@@ -156,21 +172,21 @@ __base.TEST =
 					eString_Message += "'(";
 					eString_Message += aaOptions["Location"][1];
 					eString_Message += ") - ";
-					eString_Message += __base._FUNCTIONS.ExpandObjects( aaOptions["Result"] );
+					eString_Message += SIMPL._FUNCTIONS.ExpandObjects( aaOptions["Result"] );
 					eString_Message += ", ";
-					eString_Message += __base._FUNCTIONS.ExpandObjects( aaOptions["Result.OK"] );
-					if ( __base.GetValue( aaOptions, "Remarks" ) !== false )
+					eString_Message += SIMPL._FUNCTIONS.ExpandObjects( aaOptions["Result.OK"] );
+					if ( SIMPL.GetValue( aaOptions, "Remarks" ) !== false )
 					{
 						eString_Message += aaOptions["Remarks"];
 					}
 
-					if ( __base.GetValue( aaOptions, "Full" ) )
+					if ( SIMPL.GetValue( aaOptions, "Full" ) )
 					{
 						eString_Message += "\n";
 						eString_Message += e.stack;
 					}
 
-					__base.TEST._AddLog( eString_Message );
+					SIMPL.TEST._AddLog( eString_Message );
 				}
 			}
 		},
@@ -192,17 +208,17 @@ __base.TEST =
 					var arStrings = eString_Argument.split( "\n" );
 					for ( const eString of arStrings )
 					{
-						__base.LOGGER.AddLog( eString );
+						SIMPL.LOGGER.AddLog( eString );
 					}
 				}
 				else
 				{
-					__base.LOGGER.AddLog( __base._FUNCTIONS.ExpandObjects( arArguments[0] ) );
+					SIMPL.LOGGER.AddLog( SIMPL._FUNCTIONS.ExpandObjects( arArguments[0] ) );
 				}
 			}
 			else
 			{
-				__base.LOGGER.AddLog( __base._FUNCTIONS.ExpandObjects( arArguments ) );
+				SIMPL.LOGGER.AddLog( SIMPL._FUNCTIONS.ExpandObjects( arArguments ) );
 			}
 		},
 
@@ -210,21 +226,21 @@ __base.TEST =
 	_AddLog_Direct : 
 		function ( eString )
 		{
-			__base.LOGGER.AddLog( eString );
+			SIMPL.LOGGER.AddLog( eString );
 		},
 
 
 	_AddSkip : 
 		function ()
 		{
-			__base.TEST.m_iCount_Skip++;
+			SIMPL.TEST.m_iCount_Skip++;
 		},
 
 
 	_AddTotal : 
 		function ()
 		{
-			__base.TEST.m_iCount_Total++;
+			SIMPL.TEST.m_iCount_Total++;
 		}
 
 
@@ -234,7 +250,7 @@ __base.TEST =
 // -------------------------------------------------------------------
 // check
 
-__base.TEST.Check = 
+SIMPL.TEST.Check = 
 {
 	// ---------------------------------------------------------------
 	// public
@@ -242,21 +258,21 @@ __base.TEST.Check =
 	Array : 
 		function ( arResults, arResults_OK, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( arResults_OK == null )
 			{
 				arResults_OK = [];
 			}
 
-			if ( __base._FUNCTIONS.CheckEquals_Array( arResults, arResults_OK ) == false )
+			if ( SIMPL._FUNCTIONS.CheckEquals_Array( arResults, arResults_OK ) == false )
 			{
 				var aaOptions = {};
 				aaOptions["Error"] = new Error( "Check" );
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = arResults;
 				aaOptions["Result.OK"] = arResults_OK;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -264,21 +280,21 @@ __base.TEST.Check =
 	AssociativeArray : 
 		function ( aaResults, aaResults_OK, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( aaResults_OK == null )
 			{
 				aaResults_OK = {};
 			}
 
-			if ( __base._FUNCTIONS.CheckEquals_AssociativeArray( aaResults, aaResults_OK ) == false )
+			if ( SIMPL._FUNCTIONS.CheckEquals_AssociativeArray( aaResults, aaResults_OK ) == false )
 			{
 				var aaOptions = {};
 				aaOptions["Error"] = new Error( "Check" );
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = aaResults;
 				aaOptions["Result.OK"] = aaResults_OK;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -286,7 +302,7 @@ __base.TEST.Check =
 	Boolean : 
 		function ( bResult, bResult_OK, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( bResult_OK == null )
 			{
@@ -300,7 +316,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = bResult;
 				aaOptions["Result.OK"] = bResult_OK;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -308,21 +324,21 @@ __base.TEST.Check =
 	DateTime : 
 		function ( eResult, eResult_OK, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( eResult_OK == null )
 			{
 				eResult_OK = new Date( 0 );
 			}
 
-			if ( __base._FUNCTIONS.CheckEquals_DateTime( eResult, eResult_OK ) == false )
+			if ( SIMPL._FUNCTIONS.CheckEquals_DateTime( eResult, eResult_OK ) == false )
 			{
 				var aaOptions = {};
 				aaOptions["Error"] = new Error( "Check" );
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = eResult;
 				aaOptions["Result.OK"] = eResult_OK;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -330,7 +346,7 @@ __base.TEST.Check =
 	Integer : 
 		function ( iResult, iResult_OK, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( iResult_OK == null )
 			{
@@ -344,7 +360,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = iResult;
 				aaOptions["Result.OK"] = iResult_OK;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -352,7 +368,7 @@ __base.TEST.Check =
 	NotNull : 
 		function ( eResult, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( eResult === null )
 			{
@@ -361,7 +377,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = eResult;
 				aaOptions["Result.OK"] = "!null";
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -369,7 +385,7 @@ __base.TEST.Check =
 	NotUndefined : 
 		function ( eResult, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( eResult === undefined )
 			{
@@ -378,7 +394,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = eResult;
 				aaOptions["Result.OK"] = "!undefined";
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -386,7 +402,7 @@ __base.TEST.Check =
 	Null : 
 		function ( eResult, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( eResult !== null )
 			{
@@ -395,7 +411,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = eResult;
 				aaOptions["Result.OK"] = null;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -403,7 +419,7 @@ __base.TEST.Check =
 	Real : 
 		function ( rResult, rResult_OK, rThreshold, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( rResult_OK == null )
 			{
@@ -431,7 +447,7 @@ __base.TEST.Check =
 				aaOptions["Result"] = rResult;
 				aaOptions["Result.OK"] = rResult_OK;
 				aaOptions["Remarks"] = ", ( <> " + rThreshold + " )";
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -439,7 +455,7 @@ __base.TEST.Check =
 	String : 
 		function ( eString, eString_OK, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( eString_OK == null )
 			{
@@ -453,7 +469,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = eString;
 				aaOptions["Result.OK"] = eString_OK;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -461,7 +477,7 @@ __base.TEST.Check =
 	Undefined : 
 		function ( eObject, ...arArguments )
 		{
-			__base.TEST._AddTotal();
+			SIMPL.TEST._AddTotal();
 
 			if ( eObject !== undefined )
 			{
@@ -470,7 +486,7 @@ __base.TEST.Check =
 				aaOptions["Arguments"] = this._AnalyzeArguments( arArguments );
 				aaOptions["Result"] = eObject;
 				aaOptions["Result.OK"] = undefined;
-				__base.TEST._AddError( aaOptions );
+				SIMPL.TEST._AddError( aaOptions );
 			}
 		},
 
@@ -502,9 +518,7 @@ __base.TEST.Check =
 // -------------------------------------------------------------------
 // overwrite
 
-__base.TEST.Check.Assoc = __base.TEST.Check.AssociativeArray;
-
-var TEST = __base.TEST;
+SIMPL.TEST.Check.Assoc = SIMPL.TEST.Check.AssociativeArray;
 
 
 

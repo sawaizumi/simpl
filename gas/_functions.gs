@@ -53,11 +53,16 @@ __base._FUNCTIONS =
 
 
 	BuildAssociativeArray_Indexed : 
-		function ( arStrings )
+		function ( arStrings, iOffset )
 		{
 			var aaResults = {};
 
-			var iCount = 0;
+			if ( iOffset == null )
+			{
+				iOffset = 0;
+			}
+
+			var iCount = iOffset;
 			for ( const eString of arStrings )
 			{
 				aaResults[eString] = iCount;
@@ -199,11 +204,11 @@ __base._FUNCTIONS =
 
 
 	ExpandObjects : 
-		function ( eObject, aaOptions )
+		function ( eObject, aaOptions, iLimit )
 		{
 			var eString_Result = "";
 
-			aaOptions = this._DefaultOptions( aaOptions );
+			aaOptions = this._DefaultOptions_ExpandObjects( aaOptions, iLimit );
 			bFlag_AddType = aaOptions["Add.Type"];
 
 			if ( aaOptions["Limit.Recursive"] == 0 )
@@ -263,7 +268,7 @@ __base._FUNCTIONS =
 					eString_Result = "Array( " + eString_Result + " )";
 				}
 			}
-			else if ( ( typeof eObject ) == "object" )
+			else if ( __base.IsAssoc( eObject ) )
 			{
 				var arKeys = Object.keys( eObject );
 				for ( const eKey of arKeys )
@@ -282,12 +287,42 @@ __base._FUNCTIONS =
 					eString_Result = "object( " + eString_Result + " )";
 				}
 			}
+			else if ( ( typeof eObject ) == "object" )
+			{
+				var arKeys = Object.keys( eObject );
+				for ( const eKey of arKeys )
+				{
+					if ( eString_Result != "" )
+					{
+						eString_Result += ", ";
+					}
+
+					eString_Result += '"' + eKey + '"' + " : " + this.ExpandObjects( eObject[eKey], bFlag_AddType, iLimit );
+				}
+
+				if ( eString_Result == "" )
+				{
+					eString_Result += '"' + "name" + '"';
+					eString_Result += " : ";
+					eString_Result += '"' + eObject.constructor.name + '"';
+					eString_Result += ", ";
+					eString_Result += '"' + "toString" + '"';
+					eString_Result += " : ";
+					eString_Result += '"' + eObject.toString() + '"';
+				}
+
+				eString_Result = "{ " + eString_Result + " }";
+				if ( bFlag_AddType )
+				{
+					eString_Result = "object( " + eString_Result + " )";
+				}
+			}
 			else
 			{
 				eString_Result = typeof eObject;
 				if ( bFlag_AddType )
 				{
-					eString_Result += "()";
+					eString_Result += "( " + eString_Result + " )";
 				}
 			}
 
@@ -457,7 +492,7 @@ __base._FUNCTIONS =
 			var arKeys = Object.keys( aaReplaceLabels );
 			for ( const eKey of arKeys )
 			{
-				eString_Result = eString_Result.replace( eKey, aaReplaceLabels[eKey] );
+				eString_Result = eString_Result.replaceAll( eKey, aaReplaceLabels[eKey] );
 			}
 
 			return eString_Result;
@@ -467,6 +502,42 @@ __base._FUNCTIONS =
 	// ---------------------------------------------------------------
 	// private
 
+	_DefaultOptions_ExpandObjects : 
+		function ( aaOptions, iLimit )
+		{
+			if ( aaOptions === true )
+			{
+				aaOptions = { "Add.Type" : true };
+			}
+			if ( aaOptions === false )
+			{
+				aaOptions = { "Add.Type" : false };
+			}
+			else
+			{
+				aaOptions = this._DefaultOptions( aaOptions );
+			}
+
+			if ( ( typeof iLimit ) == "number" )
+			{
+				if ( iLimit >= 0 )
+				{
+					aaOptions["Limit.Recursive"] = iLimit;
+				}
+			}
+
+			if ( this.GetValue( aaOptions, ".Recursive" ) === false )
+			{
+				aaOptions["Limit.Recursive"] = this.GetValue( aaOptions, "Limit.Recursive", 5 );
+				aaOptions["Add.Type"] = this.GetValue( aaOptions, "Add.Type" );
+
+				aaOptions[".Recursive"] = true;
+			}
+
+			return aaOptions;
+		},
+
+
 	_DefaultOptions : 
 		function ( aaOptions )
 		{
@@ -474,14 +545,13 @@ __base._FUNCTIONS =
 			{
 				aaOptions = {};
 			}
-
-			aaOptions = JSON.parse( JSON.stringify( aaOptions ) );
-			if ( this.GetValue( aaOptions, ".Recursive" ) === false )
+			else if ( ( typeof aaOptions ) == "string" )
 			{
-				aaOptions["Limit.Recursive"] = this.GetValue( aaOptions, "Limit.Recursive", 5 );
-				aaOptions["Add.Type"] = this.GetValue( aaOptions, "Add.Type" );
-
-				aaOptions[".Recursive"] = true;
+				aaOptions = JSON.parse( aaOptions );
+			}
+			else
+			{
+				aaOptions = JSON.parse( JSON.stringify( aaOptions ) );
 			}
 
 			return aaOptions;
@@ -503,6 +573,10 @@ __base.Padding = __base._FUNCTIONS.Padding;
 
 var _FUNCTIONS = __base._FUNCTIONS;
 var GetValue = __base._FUNCTIONS.GetValue;
+var IsArray = __base._FUNCTIONS.IsArray;
+var IsAssoc = __base._FUNCTIONS.IsAssociativeArray;
+var IsAssociativeArray = __base._FUNCTIONS.IsAssociativeArray;
+var IsDateTime = __base._FUNCTIONS.IsDateTime;
 
 
 
