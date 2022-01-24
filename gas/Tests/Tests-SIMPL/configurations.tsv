@@ -1,5 +1,19 @@
+# 日本語UTF-8, LF, Tab=4						
 key	sub-key-00	sub-key-01	sub-key-02	sub-key-03	value	remarks
-target	sheet	id				対象スプレッドシートID
-target	sheet	sheet-name			test	対象シート名
+this					this	
+this	key				value	
+this	folder	id			[対象フォルダーID]	
+this	sheet	id			[対象スプレッドシートID]	
+this	sheet	name			Tests-SIMPL	
+this	sheet	sheet-name			configurations	
+this	sheet	sheet-names			configurations	
+this	sheet	sheet-names			tmp	
+test-gas-gss	sheet	id			[対象スプレッドシートID]	
+test-gas-gss	sheet	name			TestData-SIMPL	
+test-gas-gss	sheet	sheet-name			gas-gss	
+test-gas-gss-configuration	sheet	id			[対象スプレッドシートID]	
+test-gas-gss-configuration	sheet	name			TestData-SIMPL	
+test-gas-gss-configuration	sheet	sheet-name			gas-gss-configuration	
+
 
 

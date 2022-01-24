@@ -36,6 +36,7 @@ SIMPL.TEST =
 	m_bFlag_ShowRealTime : true,
 	m_eDateTime_Begin : null,
 	m_arErrors : [],
+	m_arDescriptions : [],
 
 
 	// ---------------------------------------------------------------
@@ -53,6 +54,7 @@ SIMPL.TEST =
 			SIMPL.TEST.m_eDateTime_Begin = new Date();
 			SIMPL.TEST.m_eDateTime_End = new Date();
 			SIMPL.TEST.m_arErrors = [];
+			SIMPL.TEST.m_arDescriptions = [];
 		},
 
 
@@ -115,6 +117,7 @@ SIMPL.TEST =
 
 			aaDescriptions = aaDescriptions || {};
 			aaDescriptions["e"] = e;
+			SIMPL.TEST.m_arDescriptions.push( aaDescriptions );
 
 			return aaDescriptions;
 		},

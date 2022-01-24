@@ -50,6 +50,7 @@ TEST.SIMPL._FUNCTIONS =
 			this.CheckEquals_AssociativeArray();
 			this.CheckEquals_DateTime();
 			this.ExpandObjects();
+			this.GetObject();
 			this.GetValue();
 			this.IsArray();
 			this.IsAssociativeArray();
@@ -416,6 +417,95 @@ TEST.SIMPL._FUNCTIONS =
 		},
 
 
+	GetObject : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eObject, eString_Name, eObject_Default )",
+"subject"   : "オブジェクトの名前による取得",
+"arguments" : 
+	[
+		{ "object" : "対象オブジェクト" },
+		{ "string" : "名前" },
+		{ "object" : "デフォルト値" }
+	],
+"return"    : { "object" : "オブジェクト" },
+
+"summary"   : 
+	[
+		"名前を'.'で連結する事でさらに子のオブジェクトも取得可能",
+		"配列も'[]'で括る事で取り扱う事が可能",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( undefined, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( null, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( true, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( false, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( 0, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( 1, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( 1.1, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( "", "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( "0", "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( "1", "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( "a", "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( [], "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( [ 1 ], "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( {}, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( { "a" : 1 }, "test" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( 0, 0, undefined ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( 0, 0, null ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetObject( 0, 0, true ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( 0, 0, 0 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( 0, 0, 1 ), 1 );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( 0, 0, "" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( 0, 0, "0" ), "0" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( 0, 0, "1" ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( 0, 0, "a" ), "a" );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.GetObject( 0, 0, [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.GetObject( 0, 0, [ 1 ] ), [ 1 ] );
+			SIMPL.TEST.Check.AssociativeArray( SIMPL._FUNCTIONS.GetObject( 0, 0, {} ) );
+			SIMPL.TEST.Check.AssociativeArray( SIMPL._FUNCTIONS.GetObject( 0, 0, { "a" : 1 } ), { "a" : 1 } );
+
+			var arValues = [ 1, "a" ];
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( arValues, 0 ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( arValues, 1 ), "a" );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( arValues, 2 ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( arValues, -1 ), "a" );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( arValues, -2 ), 1 );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( arValues, -3 ) );
+
+			var aaValues = { "a" : 1, "b" : [ "c", [ "00", { "01" : "d", 2 : "e", "3" : { "f" : 0, "g" : { "4" : 0, "h" : null, "i" : undefined } }, "j" : true }, 5 ], { 6 : "07", "08" : [ 9, [ 10, 11 ] ] } ], "k" : false };
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( aaValues, "a" ), 1 );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b[0]" ), "c" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b.[1].[0]" ), "00" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b.[1][0]" ), "00" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][0]" ), "00" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1].01" ), "d" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1].2" ), "e" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1][2]" ), "e" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetObject( aaValues, "b[2].6" ), "07" );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( aaValues, "b[2].08[1][0]" ), 10 );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( aaValues, 1 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1].3.f" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1][3].f" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1][3].g.4" ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1][3].g.h" ) );
+			SIMPL.TEST.Check.Undefined( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1][3].g.i" ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetObject( aaValues, "b[1][1].j" ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetObject( aaValues, "k" ), false );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetObject( aaValues, "k", "test" ), false );
+		},
+
+
 	GetValue : 
 		function ()
 		{
@@ -476,10 +566,10 @@ TEST.SIMPL._FUNCTIONS =
 			var arValues = [ 1, "a" ];
 			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, 0 ), 1 );
 			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, 1 ), "a" );
-			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, 2 ), false );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetValue( arValues, 2 ), false );
 			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetValue( arValues, -1 ), "a" );
 			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, -2 ), 1 );
-			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, -3 ), false );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetValue( arValues, -3 ), false );
 
 			var aaValues = { "a" : 1, "b" : "c", "01" : "d", 2 : "e", "3" : "f", "g" : "4", "h" : null, "i" : undefined, "j" : true, "k" : false };
 			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( aaValues, "a" ), 1 );

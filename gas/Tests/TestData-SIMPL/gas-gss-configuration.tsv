@@ -1,0 +1,26 @@
+# 日本語UTF-8, LF, Tab=4						
+key	value	remarks	key-a	value-a	remarks-a	
+key-a	value-a	remarks-a	key	value	remarks	
+value	remarks		key	sub-key-00	sub-key-01	sub-key-02
+key	sub-key-00	sub-key-01	sub-key-02	sub-key-03	value	remarks
+key	sub-key-00	sub-key-01			value	remarks
+						
+						
+						
+						
+key	value	remarks				
+configuration	1					
+						
+						
+						
+key	sub-key-00	sub-key-01	sub-key-02	sub-key-03	value	remarks
+configuration					2	
+configuration	sub-key				a	
+						
+						
+						
+		remarks	value	key		
+		test	3	configuration		
+
+
+

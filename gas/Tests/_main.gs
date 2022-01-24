@@ -44,10 +44,11 @@ const STRING__GAS_PROJECT_NAME = "Tests-SIMPL";
 
 function Tests_All()
 {
-	var eString_Title = "Mode : Tests_G1";
+	var eString_Title = "Mode : Tests_All";
 	var aaOptions = {};
 	aaOptions["Execute._BASE"] = true;
 	aaOptions["Execute._FUNCTIONS"] = true;
+	aaOptions["Execute.CONFIGURATION"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -56,7 +57,7 @@ function Tests_All()
 function Tests_Single()
 {
 	var eString_Execute = "Execute.";
-	eString_Execute += "_FUNCTIONS";
+	eString_Execute += "CONFIGURATION";
 
 	var aaOptions = {};
 	aaOptions[eString_Execute] = true;
@@ -91,6 +92,7 @@ function Tests_G1()
 	var eString_Title = "Mode : Tests_G1";
 	var aaOptions = {};
 	aaOptions["Execute._BASE"] = true;
+	aaOptions["Execute._FUNCTIONS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -99,8 +101,9 @@ function Tests_G1()
 function Tests_G2()
 {
 	var eString_Title = "Mode : Tests_G2";
-Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 	var aaOptions = {};
+	aaOptions["Execute.CONFIGURATION"] = true;
+	aaOptions["Execute.GAS.GSS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -147,8 +150,11 @@ function Main( aaOptions )
 {
 //	SIMPL.SIMPL___Base();
 
-//	var aaConfigurations = SIMPL.CONFIGURATION.GetConfigurations( aaArguments );
-	var aaConfigurations = {};
+	var aaArguments = {};
+	aaArguments["offset.row"] = 2;
+	aaArguments["column-order.value"] = "F";
+	var aaConfigurations = SIMPL.GAS.GSS.CONFIGURATION.GetConfigurations( aaArguments );
+//	var aaConfigurations = {};
 	var aaResults = {}
 
 	// Setup
@@ -161,7 +167,7 @@ function Main( aaOptions )
 	SIMPL.TEST.ShowResults.Begin();
 
 	local_Build( aaConfigurations );
-	local_Check_OK( aaConfigurations, aaOptions );
+	local_Check( aaConfigurations, aaOptions, "OK" );
 
 	SIMPL.TEST.ShowResults.End();
 	aaResults["OK"] = SIMPL.TEST.ShowResults.Get();
@@ -175,7 +181,7 @@ function Main( aaOptions )
 	SIMPL.TEST.ShowResults.Begin();
 
 	local_Build( aaConfigurations );
-	local_Check_NG( aaConfigurations, aaOptions );
+	local_Check( aaConfigurations, aaOptions, "NG" );
 
 	SIMPL.TEST.ShowResults.End();
 	aaResults["NG"] = SIMPL.TEST.ShowResults.Get();
@@ -225,42 +231,20 @@ function local_Build( aaConfigurations )
 // -------------------------------------------------------------------
 // check
 
-function local_Check_OK( aaConfigurations, aaOptions )
+function local_Check( aaConfigurations, aaOptions, eString_Mode )
 {
-	var eString_Execute;
-
-	eString_Execute = "_BASE";
-	if ( SIMPL.GetValue( aaOptions, ( "Execute." + eString_Execute ) ) )
+	const arKeys = Object.keys( aaOptions );
+	for ( const eKey of arKeys )
 	{
-		SIMPL.LOGGER.AddLog( "Check - " + eString_Execute );
-		TEST.SIMPL._BASE.Check_OK();
-	}
+		const eString_Prefix = "Execute.";
+		if ( eKey.startsWith( eString_Prefix ) )
+		{
+			const eString_Execute = eKey.substring( eString_Prefix.length );
+			var eObject = SIMPL.GetObject( TEST.SIMPL, eString_Execute );
 
-	eString_Execute = "_FUNCTIONS";
-	if ( SIMPL.GetValue( aaOptions, ( "Execute." + eString_Execute ) ) )
-	{
-		SIMPL.LOGGER.AddLog( "Check - " + eString_Execute );
-		TEST.SIMPL._FUNCTIONS.Check_OK();
-	}
-}
-
-
-function local_Check_NG( aaConfigurations, aaOptions )
-{
-	var eString_Execute;
-
-	eString_Execute = "_BASE";
-	if ( SIMPL.GetValue( aaOptions, ( "Execute." + eString_Execute ) ) )
-	{
-		SIMPL.LOGGER.AddLog( "Check - " + eString_Execute );
-		TEST.SIMPL._BASE.Check_NG();
-	}
-
-	eString_Execute = "_FUNCTIONS";
-	if ( SIMPL.GetValue( aaOptions, ( "Execute." + eString_Execute ) ) )
-	{
-		SIMPL.LOGGER.AddLog( "Check - " + eString_Execute );
-		TEST.SIMPL._FUNCTIONS.Check_NG();
+			SIMPL.LOGGER.AddLog( "Check - " + eString_Execute );
+			eObject[( "Check_" + eString_Mode )]( aaConfigurations );
+		}
 	}
 }
 

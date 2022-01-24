@@ -330,6 +330,52 @@ __base._FUNCTIONS =
 		},
 
 
+	GetObject : 
+		function ( eObject, eString_Name, eObject_Default )
+		{
+			if ( eObject_Default === undefined )
+			{
+				eObject_Default = null;
+			}
+
+			if ( ( typeof eObject ) == "object" )
+			{
+				if ( ( typeof eString_Name ) == "string" )
+				{
+					const arNames = eString_Name.split( "." )
+					for ( const eBlock of arNames )
+					{
+						var arKeys = eBlock.replaceAll( "]", "" ).split( "[" );
+						var eKey = arKeys.shift();
+						if ( eKey != "" )
+						{
+							eObject = this.GetValue( eObject, eKey, eObject_Default );
+						}
+
+						while ( eKey = arKeys.shift() )
+						{
+							eObject = this.GetValue( eObject, parseInt( eKey ), eObject_Default );
+						}
+					}
+				}
+				else if ( ( typeof eString_Name ) == "number" )
+				{
+					eObject = this.GetValue( eObject, eString_Name, eObject_Default );
+				}
+				else
+				{
+					eObject = eObject_Default;
+				}
+			}
+			else
+			{
+				eObject = eObject_Default;
+			}
+
+			return eObject
+		},
+
+
 	GetValue : 
 		function ( eObject, eKey, eValue_Default )
 		{
@@ -564,6 +610,7 @@ __base._FUNCTIONS =
 // -------------------------------------------------------------------
 // overwrite
 
+__base.GetObject = __base._FUNCTIONS.GetObject;
 __base.GetValue = __base._FUNCTIONS.GetValue;
 __base.IsArray = __base._FUNCTIONS.IsArray;
 __base.IsAssoc = __base._FUNCTIONS.IsAssociativeArray;
@@ -572,6 +619,7 @@ __base.IsDateTime = __base._FUNCTIONS.IsDateTime;
 __base.Padding = __base._FUNCTIONS.Padding;
 
 var _FUNCTIONS = __base._FUNCTIONS;
+var GetObject = __base._FUNCTIONS.GetObject;
 var GetValue = __base._FUNCTIONS.GetValue;
 var IsArray = __base._FUNCTIONS.IsArray;
 var IsAssoc = __base._FUNCTIONS.IsAssociativeArray;
