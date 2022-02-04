@@ -208,7 +208,7 @@ __base._FUNCTIONS =
 		{
 			var eString_Result = "";
 
-			aaOptions = this._DefaultOptions_ExpandObjects( aaOptions, iLimit );
+			aaOptions = __base._FUNCTIONS._DefaultOptions_ExpandObjects( aaOptions, iLimit );
 			bFlag_AddType = aaOptions["Add.Type"];
 
 			if ( aaOptions["Limit.Recursive"] == 0 )
@@ -610,6 +610,7 @@ __base._FUNCTIONS =
 // -------------------------------------------------------------------
 // overwrite
 
+__base.ExpandObjects = __base._FUNCTIONS.ExpandObjects;
 __base.GetObject = __base._FUNCTIONS.GetObject;
 __base.GetValue = __base._FUNCTIONS.GetValue;
 __base.IsArray = __base._FUNCTIONS.IsArray;
@@ -619,6 +620,7 @@ __base.IsDateTime = __base._FUNCTIONS.IsDateTime;
 __base.Padding = __base._FUNCTIONS.Padding;
 
 var _FUNCTIONS = __base._FUNCTIONS;
+var ExpandObjects = __base._FUNCTIONS.ExpandObjects;
 var GetObject = __base._FUNCTIONS.GetObject;
 var GetValue = __base._FUNCTIONS.GetValue;
 var IsArray = __base._FUNCTIONS.IsArray;

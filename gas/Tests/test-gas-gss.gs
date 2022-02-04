@@ -57,8 +57,11 @@ TEST.SIMPL.GAS.GSS =
 			this.FindColumnIndex( eSheet );
 			this.FindRowIndices( eSheet );
 			this.FindRowIndex( eSheet );
+			this.GetRange( eSheet );
+			this.GetRangeValues( eSheet );
 			this.GetSheet( aaConfigurations );
 			this.GetSpreadSheet( aaConfigurations );
+			this.SetRangeValues( eSheet );
 
 			this.CONFIGURATION.FindColumnIndices( aaConfigurations );
 			this.CONFIGURATION.GetConfigurations( aaConfigurations );
@@ -569,6 +572,122 @@ TEST.SIMPL.GAS.GSS =
 		},
 
 
+	GetRange : 
+		function ( eSheet )
+		{
+			var aaDescriptions = 
+				{
+"function"  : "function ( eSheet, iRow_Start, iColumn_Start, iRow_End, iColumn_End )",
+"subject"   : "セル(範囲)取得",
+"arguments" : 
+	[
+		{ "object" : "シート" },
+		{ "integer/assoc" : "行番号/設定オブジェクト" },
+		{ "integer" : "列番号" },
+		{ "integer" : "行番号" },
+		{ "integer" : "列番号" }
+	],
+"return"    : { "object" : "範囲オブジェクト" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			var eSpreadSheet = SpreadsheetApp.getActiveSpreadsheet();
+			var eSheet_Test = eSheet.copyTo( eSpreadSheet );
+			eSheet_Test.deleteRow( 1 );
+
+			var eRange = SIMPL.GAS.GSS.GetRange( eSheet_Test );
+			SIMPL.TEST.Check.Integer( eRange.getHeight(), eSheet_Test.getMaxRows() );
+			SIMPL.TEST.Check.Integer( eRange.getWidth(), eSheet_Test.getMaxColumns() );
+			SIMPL.TEST.Check.Integer( eRange.getRow(), 1 );
+			SIMPL.TEST.Check.Integer( eRange.getColumn(), 1 );
+			SIMPL.TEST.Check.Integer( eRange.getLastRow(), eSheet_Test.getMaxRows() );
+			SIMPL.TEST.Check.Integer( eRange.getLastColumn(), eSheet_Test.getMaxColumns() );
+			eRange = SIMPL.GAS.GSS.GetRange( eSheet_Test, 2, 3, 4, 5 );
+			SIMPL.TEST.Check.Integer( eRange.getHeight(), 3 );
+			SIMPL.TEST.Check.Integer( eRange.getWidth(), 3 );
+			SIMPL.TEST.Check.Integer( eRange.getRow(), 2 );
+			SIMPL.TEST.Check.Integer( eRange.getColumn(), 3 );
+			SIMPL.TEST.Check.Integer( eRange.getLastRow(), 4 );
+			SIMPL.TEST.Check.Integer( eRange.getLastColumn(), 5 );
+			eRange = SIMPL.GAS.GSS.GetRange( eSheet_Test, { "row.start" : 2, "column.start" : 3, "row.end" : 4, "column.end" : 5 } );
+			SIMPL.TEST.Check.Integer( eRange.getHeight(), 3 );
+			SIMPL.TEST.Check.Integer( eRange.getWidth(), 3 );
+			SIMPL.TEST.Check.Integer( eRange.getRow(), 2 );
+			SIMPL.TEST.Check.Integer( eRange.getColumn(), 3 );
+			SIMPL.TEST.Check.Integer( eRange.getLastRow(), 4 );
+			SIMPL.TEST.Check.Integer( eRange.getLastColumn(), 5 );
+			eSpreadSheet.deleteSheet( eSheet_Test );
+		},
+
+
+	GetRangeValues : 
+		function ( eSheet )
+		{
+			var aaDescriptions = 
+				{
+"function"  : "function ( eSheet, iRow_Start, iColumn_Start, iRow_End, iColumn_End )",
+"subject"   : "値(範囲)取得",
+"arguments" : 
+	[
+		{ "object" : "シート" },
+		{ "integer/assoc" : "行番号/設定オブジェクト" },
+		{ "integer" : "列番号" },
+		{ "integer" : "行番号" },
+		{ "integer" : "列番号" }
+	],
+"return"    : { "array" : "値配列" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			var eSpreadSheet = SpreadsheetApp.getActiveSpreadsheet();
+			var eSheet_Test = eSheet.copyTo( eSpreadSheet );
+			eSheet_Test.deleteRow( 1 );
+
+			var arRangeValues = SIMPL.GAS.GSS.GetRangeValues( eSheet_Test );
+			SIMPL.TEST.Check.Integer( arRangeValues[0][0] );
+			arRangeValues = SIMPL.GAS.GSS.GetRangeValues( eSheet_Test, 2, 3, 4, 5 );
+			SIMPL.TEST.Check.Integer( arRangeValues.length, 3 );
+			SIMPL.TEST.Check.Integer( arRangeValues[0].length, 3 );
+			SIMPL.TEST.Check.Integer( arRangeValues[0][0], 12 );
+			SIMPL.TEST.Check.Integer( arRangeValues[2][2], 34 );
+			arRangeValues = SIMPL.GAS.GSS.GetRangeValues( eSheet_Test, { "row.start" : 1, "column.start" : 1, "row.end" : 18, "column.end" : 15, "trim.right" : false, "trim.bottom" : false } );
+			SIMPL.TEST.Check.Integer( arRangeValues.length, 18 );
+			SIMPL.TEST.Check.Integer( arRangeValues[0].length, 15 );
+			arRangeValues = SIMPL.GAS.GSS.GetRangeValues( eSheet_Test, { "row.start" : 1, "column.start" : 1, "row.end" : 18, "column.end" : 15, "trim.right" : true, "trim.bottom" : true } );
+			SIMPL.TEST.Check.Integer( arRangeValues.length, 16 );
+			SIMPL.TEST.Check.Integer( arRangeValues[0].length, 10 );
+			arRangeValues = SIMPL.GAS.GSS.GetRangeValues( eSheet_Test, { "row.start" : 1, "column.start" : 1, "row.end" : 18, "column.end" : 1, "dimension.reduction" : true } );
+			SIMPL.TEST.Check.Boolean( SIMPL.IsArray( arRangeValues[0] ), false );
+			SIMPL.TEST.Check.Integer( arRangeValues[0] );
+			arRangeValues = SIMPL.GAS.GSS.GetRangeValues( eSheet_Test, { "row.start" : 1, "column.start" : 1, "row.end" : 18, "column.end" : 1, "dimension.reduction" : false } );
+			SIMPL.TEST.Check.Boolean( SIMPL.IsArray( arRangeValues[0] ) );
+			SIMPL.TEST.Check.Integer( arRangeValues[0][0] );
+			eSpreadSheet.deleteSheet( eSheet_Test );
+		},
+
+
 	GetSheet : 
 		function ( aaConfigurations )
 		{
@@ -657,6 +776,48 @@ TEST.SIMPL.GAS.GSS =
 			eString_SpreadSheetName = aaConfigurations["test-gas-gss.sheet.name"];
 			eSpreadSheet = SIMPL.GAS.GSS.GetSpreadSheet( aaArguments );
 			SIMPL.TEST.Check.String( eSpreadSheet.getName(), eString_SpreadSheetName );
+		},
+
+
+	SetRangeValues : 
+		function ( eSheet )
+		{
+			var aaDescriptions = 
+				{
+"function"  : "function ( eSheet, arRangeValues, iRow_Start, iColumn_Start )",
+"subject"   : "値(範囲)設定",
+"arguments" : 
+	[
+		{ "object" : "シート" },
+		{ "array" : "値配列" },
+		{ "integer" : "行番号" },
+		{ "integer" : "列番号" }
+	],
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			var eSpreadSheet = SpreadsheetApp.getActiveSpreadsheet();
+			var eSheet_Test = eSheet.copyTo( eSpreadSheet );
+			eSheet_Test.deleteRow( 1 );
+
+			var arRangeValues = [ [ 2, 3 ], [ 4, 5 ] ];
+			SIMPL.GAS.GSS.SetRangeValues( eSheet_Test, "test" );
+			SIMPL.TEST.Check.String( eSheet_Test.getRange( 1, 1 ).getValue(), "test" );
+			SIMPL.GAS.GSS.SetRangeValues( eSheet_Test, arRangeValues );
+			SIMPL.TEST.Check.Integer( eSheet_Test.getRange( 1, 1 ).getValue(), 2 );
+			SIMPL.TEST.Check.Integer( eSheet_Test.getRange( 2, 2 ).getValue(), 5 );
+			eSpreadSheet.deleteSheet( eSheet_Test );
 		},
 
 

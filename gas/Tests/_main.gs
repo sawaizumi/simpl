@@ -103,7 +103,6 @@ function Tests_G2()
 	var eString_Title = "Mode : Tests_G2";
 	var aaOptions = {};
 	aaOptions["Execute.CONFIGURATION"] = true;
-	aaOptions["Execute.GAS.GSS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -112,8 +111,8 @@ function Tests_G2()
 function Tests_G3()
 {
 	var eString_Title = "Mode : Tests_G3";
-Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 	var aaOptions = {};
+	aaOptions["Execute.GAS.GSS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -122,6 +121,46 @@ Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 function Tests_G4()
 {
 	var eString_Title = "Mode : Tests_G4";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
+	var aaOptions = {};
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
+}
+
+
+function Tests_G5()
+{
+	var eString_Title = "Mode : Tests_G5";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
+	var aaOptions = {};
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
+}
+
+
+function Tests_G6()
+{
+	var eString_Title = "Mode : Tests_G6";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
+	var aaOptions = {};
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
+}
+
+
+function Tests_G7()
+{
+	var eString_Title = "Mode : Tests_G7";
+Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
+	var aaOptions = {};
+	aaResults = Main( aaOptions );
+	local_ShowErrors( aaResults, eString_Title );
+}
+
+
+function Tests_G8()
+{
+	var eString_Title = "Mode : Tests_G8";
 Browser.msgBox( SIMPL._FUNCTIONS.ExpandObjects( eString_Title ) );
 	var aaOptions = {};
 	aaResults = Main( aaOptions );
@@ -139,6 +178,10 @@ function Tests_OnOpen( e )
 	eMenu.addItem( "group 2", "Tests_G2" );
 	eMenu.addItem( "group 3", "Tests_G3" );
 	eMenu.addItem( "group 4", "Tests_G4" );
+	eMenu.addItem( "group 5", "Tests_G5" );
+	eMenu.addItem( "group 6", "Tests_G6" );
+	eMenu.addItem( "group 7", "Tests_G7" );
+	eMenu.addItem( "group 8", "Tests_G8" );
 	eMenu.addToUi();
 }
 
@@ -154,7 +197,6 @@ function Main( aaOptions )
 	aaArguments["offset.row"] = 2;
 	aaArguments["column-order.value"] = "F";
 	var aaConfigurations = SIMPL.GAS.GSS.CONFIGURATION.GetConfigurations( aaArguments );
-//	var aaConfigurations = {};
 	var aaResults = {}
 
 	// Setup

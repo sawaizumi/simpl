@@ -290,6 +290,107 @@ __base.GAS.GSS =
 		},
 
 
+	GetRange : 
+		function ( eSheet, iRow_Start, iColumn_Start, iRow_End, iColumn_End )
+		{
+			var iCount_Row = eSheet.getMaxRows();
+			var iCount_Column = eSheet.getMaxColumns();
+
+			if ( __base.IsAssoc( iRow_Start ) )
+			{
+				var aaArguments = iRow_Start;
+				iRow_Start = __base.GetValue( aaArguments, "row.start", null );
+				iRow_End = __base.GetValue( aaArguments, "row.end", null );
+				iColumn_Start = __base.GetValue( aaArguments, "column.start", null );
+				iColumn_End = __base.GetValue( aaArguments, "column.end", null );
+			}
+
+			if ( iRow_End != null )
+			{
+				iCount_Row = iRow_End;
+			}
+
+			if ( iColumn_End != null )
+			{
+				iCount_Column = iColumn_End;
+			}
+
+			if ( iRow_Start == null )
+			{
+				iRow_Start = 1;
+			}
+
+			if ( iColumn_Start == null )
+			{
+				iColumn_Start = 1;
+			}
+
+			return eSheet.getRange( iRow_Start, iColumn_Start, ( iCount_Row - iRow_Start + 1 ), ( iCount_Column - iColumn_Start + 1 ) );
+		},
+
+
+	GetRangeValues : 
+		function ( eSheet, iRow_Start, iColumn_Start, iRow_End, iColumn_End )
+		{
+			var arResults = [];
+
+			var eRange = __base.GAS.GSS.GetRange( eSheet, iRow_Start, iColumn_Start, iRow_End, iColumn_End );
+			var arRangeValues = eRange.getValues()
+			var aaArguments = {};
+			if ( __base.IsAssoc( iRow_Start ) )
+			{
+				aaArguments = iRow_Start;
+			}
+
+			if ( __base.GetValue( aaArguments, "trim.bottom", true ) )
+			{
+				while ( arRangeValues.length > 0 )
+				{
+					const arColumns = arRangeValues.pop();
+					if ( arColumns[0] != "" )
+					{
+						arRangeValues.push( arColumns );
+						break;
+					}
+				}
+			}
+
+			for ( var arColumns of arRangeValues )
+			{
+				if ( arColumns.length == 1 )
+				{
+					if ( __base.GetValue( aaArguments, "dimension.reduction", true ) )
+					{
+						arResults.push( arColumns[0] );
+					}
+					else
+					{
+						arResults.push( arColumns );
+					}
+				}
+				else
+				{
+					if ( __base.GetValue( aaArguments, "trim.right", true ) )
+					{
+						while ( arColumns.length > 0 )
+						{
+							const eValue = arColumns.pop();
+							if ( eValue != "" )
+							{
+								arColumns.push( eValue );
+								break;
+							}
+						}
+					}
+
+					arResults.push( arColumns );
+				}
+			}
+
+			return arResults;
+		},
+
+
 	GetSheet : 
 		function ( aaArguments, eString_SheetName__Default )
 		{
@@ -337,6 +438,50 @@ __base.GAS.GSS =
 			}
 
 			return eSpreadSheet;
+		},
+
+
+	SetRangeValues : 
+		function ( eSheet, arRangeValues, iRow_Start, iColumn_Start )
+		{
+			var arValues = [];
+
+			if ( __base.IsArray( arRangeValues ) )
+			{
+				for ( const arColumns of arRangeValues )
+				{
+					if ( __base.IsArray( arColumns ) )
+					{
+						arValues.push( arColumns );
+					}
+					else
+					{
+						arValues.push( [ arColumns ] );
+					}
+				}
+			}
+			else
+			{
+				arValues = [ [ arRangeValues ] ];
+			}
+
+			var iCount_Row = arValues.length;
+			var iCount_Column = arValues[0].length;
+
+			if ( iRow_Start == null )
+			{
+				iRow_Start = 1;
+			}
+
+			if ( iColumn_Start == null )
+			{
+				iColumn_Start = 1;
+			}
+
+			var iRow_End = iRow_Start + iCount_Row - 1;
+			var iColumn_End = iColumn_Start + iCount_Column - 1;
+			var eRange = __base.GAS.GSS.GetRange( eSheet, iRow_Start, iColumn_Start, iRow_End, iColumn_End );
+			eRange.setValues( arValues );
 		},
 
 
