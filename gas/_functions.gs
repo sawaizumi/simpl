@@ -349,18 +349,18 @@ __base._FUNCTIONS =
 						var eKey = arKeys.shift();
 						if ( eKey != "" )
 						{
-							eObject = this.GetValue( eObject, eKey, eObject_Default );
+							eObject = __base.GetValue( eObject, eKey, eObject_Default );
 						}
 
 						while ( eKey = arKeys.shift() )
 						{
-							eObject = this.GetValue( eObject, parseInt( eKey ), eObject_Default );
+							eObject = __base.GetValue( eObject, parseInt( eKey ), eObject_Default );
 						}
 					}
 				}
 				else if ( ( typeof eString_Name ) == "number" )
 				{
-					eObject = this.GetValue( eObject, eString_Name, eObject_Default );
+					eObject = __base.GetValue( eObject, eString_Name, eObject_Default );
 				}
 				else
 				{
@@ -508,6 +508,33 @@ __base._FUNCTIONS =
 		},
 
 
+	MergeArray : 
+		function ( eObject_A, eObject_B )
+		{
+			if ( eObject_A == null )
+			{
+				eObject_A = [];
+			}
+
+			if ( eObject_B == null )
+			{
+				eObject_B = [];
+			}
+
+			if ( !Array.isArray( eObject_A ) )
+			{
+				eObject_A = [ eObject_A ];
+			}
+
+			if ( !Array.isArray( eObject_B ) )
+			{
+				eObject_B = [ eObject_B ];
+			}
+
+			return eObject_A.concat( eObject_B );
+		},
+
+
 	Padding : 
 		function ( eString, eString_Padding, iDigits )
 		{
@@ -607,10 +634,109 @@ __base._FUNCTIONS =
 };
 
 
+__base._FUNCTIONS.Get = 
+{
+	Integer : 
+		function ( eObject, eKey, iValue_Default )
+		{
+			if ( iValue_Default === undefined )
+			{
+				iValue_Default = 0;
+			}
+
+			iValue = __base._FUNCTIONS.GetValue( eObject, eKey, iValue_Default );
+			if ( iValue === iValue_Default )
+			{
+				return iValue;
+			}
+
+			if ( iValue === undefined )
+			{
+				return 0;
+			}
+
+			if ( iValue === null )
+			{
+				return 0;
+			}
+
+			if ( iValue === true )
+			{
+				return 1;
+			}
+
+			if ( iValue === false )
+			{
+				return 0;
+			}
+
+			if ( ( typeof iValue ) == "number" )
+			{
+				return parseInt( iValue, 10 );
+			}
+
+			if ( !__base._FUNCTIONS.IsValue( iValue ) )
+			{
+				return iValue_Default;
+			}
+
+			iValue = parseInt( iValue, 10 );
+			if ( isNaN( iValue ) )
+			{
+				return iValue_Default;
+			}
+
+			return iValue;
+		},
+
+
+	Object : __base._FUNCTIONS.GetObject,
+
+
+	String : 
+		function ( eObject, eKey, eString_Default )
+		{
+			if ( eString_Default === undefined )
+			{
+				eString_Default = "";
+			}
+
+			eString = __base._FUNCTIONS.GetValue( eObject, eKey, eString_Default );
+			if ( eString === eString_Default )
+			{
+				return eString;
+			}
+
+			if ( ( typeof eString ) == "string" )
+			{
+				return eString;
+			}
+
+			if ( __base._FUNCTIONS.IsValue( eString ) )
+			{
+				return "" + eString;
+			}
+
+			if ( ( typeof eString ) == "object" )
+			{
+				return eString.toString();
+			}
+
+			return eString_Default;
+		},
+
+
+	Value : __base._FUNCTIONS.GetValue
+
+
+};
+
+
 // -------------------------------------------------------------------
 // overwrite
 
 __base.ExpandObjects = __base._FUNCTIONS.ExpandObjects;
+__base.Get = __base._FUNCTIONS.Get;
 __base.GetObject = __base._FUNCTIONS.GetObject;
 __base.GetValue = __base._FUNCTIONS.GetValue;
 __base.IsArray = __base._FUNCTIONS.IsArray;
@@ -621,6 +747,7 @@ __base.Padding = __base._FUNCTIONS.Padding;
 
 var _FUNCTIONS = __base._FUNCTIONS;
 var ExpandObjects = __base._FUNCTIONS.ExpandObjects;
+var Get = __base._FUNCTIONS.Get;
 var GetObject = __base._FUNCTIONS.GetObject;
 var GetValue = __base._FUNCTIONS.GetValue;
 var IsArray = __base._FUNCTIONS.IsArray;

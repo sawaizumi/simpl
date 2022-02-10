@@ -50,12 +50,17 @@ TEST.SIMPL._FUNCTIONS =
 			this.CheckEquals_AssociativeArray();
 			this.CheckEquals_DateTime();
 			this.ExpandObjects();
+			this.Get.Integer();
+			this.Get.Object();
+			this.Get.String();
+			this.Get.Value();
 			this.GetObject();
 			this.GetValue();
 			this.IsArray();
 			this.IsAssociativeArray();
 			this.IsDateTime();
 			this.IsValue();
+			this.MergeArray();
 			this.Padding();
 			this.ReplaceLabels();
 		},
@@ -565,7 +570,7 @@ TEST.SIMPL._FUNCTIONS =
 
 			var arValues = [ 1, "a" ];
 			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, 0 ), 1 );
-			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, 1 ), "a" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetValue( arValues, 1 ), "a" );
 			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.GetValue( arValues, 2 ), false );
 			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.GetValue( arValues, -1 ), "a" );
 			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.GetValue( arValues, -2 ), 1 );
@@ -765,6 +770,172 @@ TEST.SIMPL._FUNCTIONS =
 		},
 
 
+	MergeArray : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eObject_A, eObject_B )", 
+"subject"   : "配列結合",
+"arguments" : 
+	[
+		{ "array/object" : "配列/オブジェクト" },
+		{ "array/object" : "配列/オブジェクト" }
+	],
+"return"    : { "array" : "結合配列" },
+
+"summary"   : 
+	[
+		"引数に配列以外を設定した場合は配列で包んで結合する",
+		"なので値同士を直接配列化する事も可能",
+		"ただし引数がnullやundefinedの場合は空配列化されるのでnullを結合したい場合はあらかじめ配列に入れた状態で渡す必要がある",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray() );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( undefined, undefined ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ null ], null ), [ null ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, [ null ] ), [ null ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( false ), [ false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 0 ), [ 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1 ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1.1 ), [ 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "" ), [ "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "0" ), [ "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "1" ), [ "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "a" ), [ "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1 ] ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( {} ), [ {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( { "a" : 1 } ), [ { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( undefined, null ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, null ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, null ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( false, null ), [ false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 0, null ), [ 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1, null ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1.1, null ), [ 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "", null ), [ "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "0", null ), [ "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "1", null ), [ "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "a", null ), [ "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], null ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1 ], null ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( {}, null ), [ {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( { "a" : 1 }, null ), [ { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( undefined, true ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, true ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, true ), [ true, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( false, true ), [ false, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 0, true ), [ 0, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1, true ), [ 1, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1.1, true ), [ 1.1, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "", true ), [ "", true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "0", true ), [ "0", true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "1", true ), [ "1", true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "a", true ), [ "a", true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], true ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1 ], true ), [ 1, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( {}, true ), [ {}, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( { "a" : 1 }, true ), [ { "a" : 1 }, true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( undefined, [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, [] ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( false, [] ), [ false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 0, [] ), [ 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1, [] ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1.1, [] ), [ 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "", [] ), [ "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "0", [] ), [ "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "1", [] ), [ "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "a", [] ), [ "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1 ], [] ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( {}, [] ), [ {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( { "a" : 1 }, [] ), [ { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( undefined, [ 1, "a" ] ), [ 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, [ 1, "a" ] ), [ 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, [ 1, "a" ] ), [ true, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( false, [ 1, "a" ] ), [ false, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 0, [ 1, "a" ] ), [ 0, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1, [ 1, "a" ] ), [ 1, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( 1.1, [ 1, "a" ] ), [ 1.1, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "", [ 1, "a" ] ), [ "", 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "0", [ 1, "a" ] ), [ "0", 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "1", [ 1, "a" ] ), [ "1", 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( "a", [ 1, "a" ] ), [ "a", 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], [ 1, "a" ] ), [ 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1 ], [ 1, "a" ] ), [ 1, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( {}, [ 1, "a" ] ), [ {}, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( { "a" : 1 }, [ 1, "a" ] ), [ { "a" : 1 }, 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, undefined ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, true ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, false ), [ false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, 0 ), [ 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, 1 ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, 1.1 ), [ 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, "" ), [ "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, "0" ), [ "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, "1" ), [ "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, "a" ), [ "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, [ 1 ] ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, {} ), [ {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( null, { "a" : 1 } ), [ { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, undefined ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, false ), [ true, false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, 0 ), [ true, 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, 1 ), [ true, 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, 1.1 ), [ true, 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, "" ), [ true, "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, "0" ), [ true, "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, "1" ), [ true, "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, "a" ), [ true, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, [] ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, [ 1 ] ), [ true, 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, {} ), [ true, {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( true, { "a" : 1 } ), [ true, { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], undefined ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], null ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], true ), [ true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], false ), [ false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], 0 ), [ 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], 1 ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], 1.1 ), [ 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], "" ), [ "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], "0" ), [ "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], "1" ), [ "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], "a" ), [ "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], [ 1 ] ), [ 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], {} ), [ {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [], { "a" : 1 } ), [ { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], undefined ), [ 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], null ), [ 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], true ), [ 1, "a", true ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], false ), [ 1, "a", false ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], 0 ), [ 1, "a", 0 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], 1 ), [ 1, "a", 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], 1.1 ), [ 1, "a", 1.1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], "" ), [ 1, "a", "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], "0" ), [ 1, "a", "0" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], "1" ), [ 1, "a", "1" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], "a" ), [ 1, "a", "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], [] ), [ 1, "a" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], [ 1 ] ), [ 1, "a", 1 ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], {} ), [ 1, "a", {} ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], { "a" : 1 } ), [ 1, "a", { "a" : 1 } ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.MergeArray( [ 1, "a" ], [ 2, "b" ] ), [ 1, "a", 2, "b" ] );
+		},
+
+
 	Padding : 
 		function ()
 		{
@@ -847,7 +1018,287 @@ TEST.SIMPL._FUNCTIONS =
 		}
 
 
-}
+};
+
+
+TEST.SIMPL._FUNCTIONS.Get = 
+{
+	Integer : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eObject, eKey, iValue_Default )",
+"subject"   : "配列/連想配列のキー値による取得(整数値)",
+"arguments" : 
+	[
+		{ "object" : "対象オブジェクト" },
+		{ "string" : "キー" },
+		{ "integer/object" : "デフォルト値" }
+	],
+"return"    : { "integer/object" : "値(整数値/オブジェクト)" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( undefined, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( null, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( true, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( false, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( 0, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( 1, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( 1.1, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( "", "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( "0", "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( "1", "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( "a", "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( [], "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( [ 1 ], "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( {}, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( { "a" : 1 }, "test" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( 0, 0, undefined ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.Get.Integer( 0, 0, null ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.Get.Integer( 0, 0, true ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.Get.Integer( 0, 0, false ), false );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( 0, 0, 0 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( 0, 0, 1 ), 1 );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.Integer( 0, 0, "" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.Integer( 0, 0, "0" ), "0" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.Integer( 0, 0, "1" ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.Integer( 0, 0, "a" ), "a" );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.Get.Integer( 0, 0, [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.Get.Integer( 0, 0, [ 1 ] ), [ 1 ] );
+			SIMPL.TEST.Check.AssociativeArray( SIMPL._FUNCTIONS.Get.Integer( 0, 0, {} ) );
+			SIMPL.TEST.Check.AssociativeArray( SIMPL._FUNCTIONS.Get.Integer( 0, 0, { "a" : 1 } ), { "a" : 1 } );
+
+			var arValues = [ 1, "2" ];
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( arValues, 0 ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( arValues, 1, -1 ), 2 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( arValues, 2, -1 ), -1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( arValues, -1, -1 ), 2 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( arValues, -2 ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( arValues, -3, -1 ), -1 );
+
+			var aaValues = { "a" : 1, "b" : "c", "01" : "d", 2 : "e", "3" : "f", "g" : "4", "h" : null, "i" : undefined, "j" : true, "k" : false, "l" : 1.23, "m" : "4.567", "n" : "test", "o" : [], "p" : {}, "q" : function(){ return "test"; } };
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "a" ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "b" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "01" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, 1 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, 2 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "2" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "3" ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, 3 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "g" ), 4 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "h", -1 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "i", -1 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "j", -1 ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "k", -1 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "l", -1 ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "m", -1 ), 4 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "n", -1 ), -1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "o", -1 ), -1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "p", -1 ), -1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "q", -1 ), -1 );
+
+			var aaValues = { "a" : 1, "b" : "-1", "01" : "-2", 2 : "-3", "3" : "-4" };
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "a" ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "b" ), -1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "01" ), -2 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, 1 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, 2 ), -3 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "2" ), -3 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, "3" ), -4 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Integer( aaValues, 3 ), -4 );
+		},
+
+
+	Object : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eObject, eString_Name, eObject_Default )",
+"subject"   : "オブジェクトの名前による取得",
+"arguments" : 
+	[
+		{ "object" : "対象オブジェクト" },
+		{ "string" : "名前" },
+		{ "object" : "デフォルト値" }
+	],
+"return"    : { "object" : "オブジェクト" },
+
+"summary"   : 
+	[
+		"名前を'.'で連結する事でさらに子のオブジェクトも取得可能",
+		"配列も'[]'で括る事で取り扱う事が可能",
+		""
+	],
+"check"     : 
+	[
+		"TEST.SIMPL._FUNCTIONS.GetObjectのテストにて詳細はテスト済み",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			var aaValues = { "a" : 1, "b" : [ "c", [ "00", { "01" : "d", 2 : "e", "3" : { "f" : 0, "g" : { "4" : 0, "h" : null, "i" : undefined } }, "j" : true }, 5 ], { 6 : "07", "08" : [ 9, [ 10, 11 ] ] } ], "k" : false };
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Object( aaValues, "a" ), 1 );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Object( aaValues, "b[2].08[1][0]" ), 10 );
+		},
+
+
+	String : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eObject, eKey, eString_Default )",
+"subject"   : "配列/連想配列のキー値による取得(文字列)",
+"arguments" : 
+	[
+		{ "object" : "対象オブジェクト" },
+		{ "string" : "キー" },
+		{ "string/object" : "デフォルト値" }
+	],
+"return"    : { "string/object" : "値(文字列/オブジェクト)" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( undefined, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( null, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( true, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( false, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 0, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 1, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 1.1, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( "", "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( "0", "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( "1", "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( "a", "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( [], "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( [ 1 ], "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( {}, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( { "a" : 1 }, "test" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 0, 0, undefined ) );
+			SIMPL.TEST.Check.Null( SIMPL._FUNCTIONS.Get.String( 0, 0, null ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.Get.String( 0, 0, true ) );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.Get.String( 0, 0, false ), false );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.String( 0, 0, 0 ) );
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.String( 0, 0, 1 ), 1 );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 0, 0, "" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 0, 0, "0" ), "0" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 0, 0, "1" ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( 0, 0, "a" ), "a" );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.Get.String( 0, 0, [] ) );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.Get.String( 0, 0, [ 1 ] ), [ 1 ] );
+			SIMPL.TEST.Check.AssociativeArray( SIMPL._FUNCTIONS.Get.String( 0, 0, {} ) );
+			SIMPL.TEST.Check.AssociativeArray( SIMPL._FUNCTIONS.Get.String( 0, 0, { "a" : 1 } ), { "a" : 1 } );
+
+			var arValues = [ 1, "a" ];
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( arValues, 0 ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( arValues, 1, "test" ), "a" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( arValues, 2, "test" ), "test" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( arValues, -1, "test" ), "a" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( arValues, -2 ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( arValues, -3, "test" ), "test" );
+
+			var aaValues = { "a" : 1, "b" : "c", "01" : "d", 2 : "e", "3" : "f", "g" : "4", "h" : null, "i" : undefined, "j" : true, "k" : false, "l" : 1.23, "m" : "4.567", "n" : "test", "o" : [], "p" : [ 1, "a" ], "q" : {}, "r" : { "a" : 1 }, "s" : function(){ return "test"; } };
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "a" ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "b" ), "c" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "01" ), "d" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, 1 ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, 2 ), "e" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "2" ), "e" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "3" ), "f" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, 3 ), "f" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "g" ), "4" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "h", "-1" ), "null" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "i", "-1" ), "undefined" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "j", "-1" ), "true" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "k", "-1" ), "false" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "l", "-1" ), "1.23" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "m", "-1" ), "4.567" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "n", "-1" ), "test" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "o", "-1" ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "p", "-1" ), "1,a" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "q", "-1" ), "[object Object]" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "r", "-1" ), "[object Object]" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "s", "-1" ), "-1" );
+
+			var aaValues = { "a" : 1, "b" : -1, "01" : -2, 2 : -3, "3" : -4 };
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "a" ), "1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "b" ), "-1" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "01" ), "-2" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, 1 ) );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, 2 ), "-3" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "2" ), "-3" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, "3" ), "-4" );
+			SIMPL.TEST.Check.String( SIMPL._FUNCTIONS.Get.String( aaValues, 3 ), "-4" );
+		},
+
+
+	Value : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eObject, eKey, eValue_Default )",
+"subject"   : "配列/連想配列のキー値による取得",
+"arguments" : 
+	[
+		{ "object" : "対象オブジェクト" },
+		{ "string" : "キー" },
+		{ "object" : "デフォルト値" }
+	],
+"return"    : { "object" : "値" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"TEST.SIMPL._FUNCTIONS.GetValueのテストにて詳細はテスト済み",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			var aaValues = { "a" : 1, "b" : "c", "01" : "d", 2 : "e", "3" : "f", "g" : "4", "h" : null, "i" : undefined, "j" : true, "k" : false };
+			SIMPL.TEST.Check.Integer( SIMPL._FUNCTIONS.Get.Value( aaValues, "a" ), 1 );
+			SIMPL.TEST.Check.Boolean( SIMPL._FUNCTIONS.Get.Value( aaValues, 1 ), false );
+		},
+
+
+	zzz : 
+		function ()
+		{
+		}
+
+
+};
 
 
 
