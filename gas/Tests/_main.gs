@@ -49,6 +49,8 @@ function Tests_All()
 	aaOptions["Execute._BASE"] = true;
 	aaOptions["Execute._FUNCTIONS"] = true;
 	aaOptions["Execute.CONFIGURATION"] = true;
+	aaOptions["Execute.GAS.GSS"] = true;
+	aaOptions["Execute.OPTIONS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -57,7 +59,7 @@ function Tests_All()
 function Tests_Single()
 {
 	var eString_Execute = "Execute.";
-	eString_Execute += "CONFIGURATION";
+	eString_Execute += "_BASE";
 
 	var aaOptions = {};
 	aaOptions[eString_Execute] = true;
@@ -103,6 +105,7 @@ function Tests_G2()
 	var eString_Title = "Mode : Tests_G2";
 	var aaOptions = {};
 	aaOptions["Execute.CONFIGURATION"] = true;
+	aaOptions["Execute.GAS.GSS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
@@ -112,7 +115,7 @@ function Tests_G3()
 {
 	var eString_Title = "Mode : Tests_G3";
 	var aaOptions = {};
-	aaOptions["Execute.GAS.GSS"] = true;
+	aaOptions["Execute.OPTIONS"] = true;
 	aaResults = Main( aaOptions );
 	local_ShowErrors( aaResults, eString_Title );
 }
