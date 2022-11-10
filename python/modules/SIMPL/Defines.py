@@ -19,5 +19,7 @@ TYPE__TUPLE = type((1, 2))
 TYPE__ARRAY = type([])
 TYPE__ASSOC = type({})
 
+INTEGER__TIMEOUT = 10
+
 
 

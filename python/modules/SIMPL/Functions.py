@@ -8,10 +8,27 @@ import json
 import numpy
 import os
 import pathlib
+import sys
 import time
 from urllib.parse import urlparse
 
 from .. import SIMPL
+
+
+
+# ====================================================================
+# class
+# --------------------------------------------------------------------
+
+class ChangeSTDOUT():
+	def __init__(self, eString_FullName):
+		self.m_eFile = open(eString_FullName, "a")
+
+	def __enter__(self):
+		sys.stdout = self.m_eFile
+
+	def __exit__(self, *args):
+		sys.stdout = sys.__stdout__
 
 
 
@@ -238,6 +255,15 @@ def LoadConfigurations(eString_FullName):
 	return aaConfigurations
 
 
+def LoadFile(eString_FullName):
+	eString_File = pathlib.Path(eString_FullName).open("r", encoding = "utf-8").read()
+	eString_File = eString_File.replace("\r\n", "\n")
+	eString_File = eString_File.replace("\r", "\n")
+	arStrings_Line = eString_File.split("\n")
+
+	return arStrings_Line
+
+
 def LoadJSON(eString_FullName):
 	with pathlib.Path(eString_FullName).open("r", encoding = "utf-8") as eFile:
 		eJSON = json.load(eFile)
@@ -287,7 +313,7 @@ def Wait_FileCreate(eString_FullName, iTimeout):
 	return True
 
 
-def Wait_FileDelete(eString_FullName, iTimeout):
+def Wait_FileDelete(eString_FullName, iTimeout = SIMPL.Defines.INTEGER__TIMEOUT):
 	if os.path.exists(eString_FullName):
 		os.remove(eString_FullName)
 
