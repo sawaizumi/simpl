@@ -1,0 +1,149 @@
+ [None, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(50) : TestBase.Check.Boolean(None) - in Boolean
+ [False, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(52) : TestBase.Check.Boolean(False) - in Boolean
+ [0, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(53) : TestBase.Check.Boolean(0) - in Boolean
+ [1, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(54) : TestBase.Check.Boolean(1) - in Boolean
+ ['None', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(55) : TestBase.Check.Boolean("None") - in Boolean
+ ['True', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(56) : TestBase.Check.Boolean("True") - in Boolean
+ ['False', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(57) : TestBase.Check.Boolean("False") - in Boolean
+ ['0', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(58) : TestBase.Check.Boolean("0") - in Boolean
+ ['1', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(59) : TestBase.Check.Boolean("1") - in Boolean
+ ['', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(60) : TestBase.Check.Boolean("") - in Boolean
+ ['a', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(61) : TestBase.Check.Boolean("a") - in Boolean
+ [[], True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(62) : TestBase.Check.Boolean([]) - in Boolean
+ [[0, ''], True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(63) : TestBase.Check.Boolean([0, ""]) - in Boolean
+ [(), True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(64) : TestBase.Check.Boolean(()) - in Boolean
+ [(0, ''), True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(65) : TestBase.Check.Boolean((0, "")) - in Boolean
+ [{}, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(66) : TestBase.Check.Boolean({}) - in Boolean
+ [{0: ''}, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(67) : TestBase.Check.Boolean({0: ""}) - in Boolean
+![None, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(68) : TestBase.Check.Boolean(None, False) - in Boolean
+![True, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(69) : TestBase.Check.Boolean(True, False) - in Boolean
+![0, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(71) : TestBase.Check.Boolean(0, False) - in Boolean
+![1, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(72) : TestBase.Check.Boolean(1, False) - in Boolean
+!['None', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(73) : TestBase.Check.Boolean("None", False) - in Boolean
+!['True', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(74) : TestBase.Check.Boolean("True", False) - in Boolean
+!['False', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(75) : TestBase.Check.Boolean("False", False) - in Boolean
+!['0', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(76) : TestBase.Check.Boolean("0", False) - in Boolean
+!['1', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(77) : TestBase.Check.Boolean("1", False) - in Boolean
+!['', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(78) : TestBase.Check.Boolean("", False) - in Boolean
+!['a', True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(79) : TestBase.Check.Boolean("a", False) - in Boolean
+![[], True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(80) : TestBase.Check.Boolean([], False) - in Boolean
+![[0, ''], True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(81) : TestBase.Check.Boolean([0, ""], False) - in Boolean
+![(), True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(82) : TestBase.Check.Boolean((), False) - in Boolean
+![(0, ''), True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(83) : TestBase.Check.Boolean((0, ""), False) - in Boolean
+![{}, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(84) : TestBase.Check.Boolean({}, False) - in Boolean
+![{0: ''}, True] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(85) : TestBase.Check.Boolean({0: ""}, False) - in Boolean
+ [None, 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(95) : TestBase.Check.Integer(None) - in Integer
+ [True, 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(96) : TestBase.Check.Integer(True) - in Integer
+ [False, 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(97) : TestBase.Check.Integer(False) - in Integer
+ [1, 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(99) : TestBase.Check.Integer(1) - in Integer
+ ['None', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(100) : TestBase.Check.Integer("None") - in Integer
+ ['True', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(101) : TestBase.Check.Integer("True") - in Integer
+ ['False', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(102) : TestBase.Check.Integer("False") - in Integer
+ ['0', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(103) : TestBase.Check.Integer("0") - in Integer
+ ['1', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(104) : TestBase.Check.Integer("1") - in Integer
+ ['', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(105) : TestBase.Check.Integer("") - in Integer
+ ['a', 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(106) : TestBase.Check.Integer("a") - in Integer
+ [[], 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(107) : TestBase.Check.Integer([]) - in Integer
+ [[0, ''], 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(108) : TestBase.Check.Integer([0, ""]) - in Integer
+ [(), 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(109) : TestBase.Check.Integer(()) - in Integer
+ [(0, ''), 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(110) : TestBase.Check.Integer((0, "")) - in Integer
+ [{}, 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(111) : TestBase.Check.Integer({}) - in Integer
+ [{0: ''}, 0] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(112) : TestBase.Check.Integer({0: ""}) - in Integer
+ [None, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(113) : TestBase.Check.Integer(None, 1) - in Integer
+ [True, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(114) : TestBase.Check.Integer(True, 1) - in Integer
+ [False, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(115) : TestBase.Check.Integer(False, 1) - in Integer
+ [0, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(116) : TestBase.Check.Integer(0, 1) - in Integer
+ ['None', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(118) : TestBase.Check.Integer("None", 1) - in Integer
+ ['True', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(119) : TestBase.Check.Integer("True", 1) - in Integer
+ ['False', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(120) : TestBase.Check.Integer("False", 1) - in Integer
+ ['0', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(121) : TestBase.Check.Integer("0", 1) - in Integer
+ ['1', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(122) : TestBase.Check.Integer("1", 1) - in Integer
+ ['', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(123) : TestBase.Check.Integer("", 1) - in Integer
+ ['a', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(124) : TestBase.Check.Integer("a", 1) - in Integer
+ [[], 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(125) : TestBase.Check.Integer([], 1) - in Integer
+ [[0, ''], 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(126) : TestBase.Check.Integer([0, ""], 1) - in Integer
+ [(), 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(127) : TestBase.Check.Integer((), 1) - in Integer
+ [(0, ''), 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(128) : TestBase.Check.Integer((0, ""), 1) - in Integer
+ [{}, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(129) : TestBase.Check.Integer({}, 1) - in Integer
+ [{0: ''}, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(130) : TestBase.Check.Integer({0: ""}, 1) - in Integer
+![None, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(131) : TestBase.Check.Integer(None, 1, False) - in Integer
+![True, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(132) : TestBase.Check.Integer(True, 1, False) - in Integer
+![False, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(133) : TestBase.Check.Integer(False, 1, False) - in Integer
+![1, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(135) : TestBase.Check.Integer(1, 1, False) - in Integer
+!['None', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(136) : TestBase.Check.Integer("None", 1, False) - in Integer
+!['True', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(137) : TestBase.Check.Integer("True", 1, False) - in Integer
+!['False', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(138) : TestBase.Check.Integer("False", 1, False) - in Integer
+!['0', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(139) : TestBase.Check.Integer("0", 1, False) - in Integer
+!['1', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(140) : TestBase.Check.Integer("1", 1, False) - in Integer
+!['', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(141) : TestBase.Check.Integer("", 1, False) - in Integer
+!['a', 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(142) : TestBase.Check.Integer("a", 1, False) - in Integer
+![[], 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(143) : TestBase.Check.Integer([], 1, False) - in Integer
+![[0, ''], 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(144) : TestBase.Check.Integer([0, ""], 1, False) - in Integer
+![(), 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(145) : TestBase.Check.Integer((), 1, False) - in Integer
+![(0, ''), 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(146) : TestBase.Check.Integer((0, ""), 1, False) - in Integer
+![{}, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(147) : TestBase.Check.Integer({}, 1, False) - in Integer
+![{0: ''}, 1] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(148) : TestBase.Check.Integer({0: ""}, 1, False) - in Integer
+ [True, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(159) : TestBase.Check.Null(True) - in Null
+ [False, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(160) : TestBase.Check.Null(False) - in Null
+ [0, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(161) : TestBase.Check.Null(0) - in Null
+ [1, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(162) : TestBase.Check.Null(1) - in Null
+ ['None', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(163) : TestBase.Check.Null("None") - in Null
+ ['True', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(164) : TestBase.Check.Null("True") - in Null
+ ['False', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(165) : TestBase.Check.Null("False") - in Null
+ ['0', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(166) : TestBase.Check.Null("0") - in Null
+ ['1', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(167) : TestBase.Check.Null("1") - in Null
+ ['', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(168) : TestBase.Check.Null("") - in Null
+ ['a', None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(169) : TestBase.Check.Null("a") - in Null
+ [[], None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(170) : TestBase.Check.Null([]) - in Null
+ [[0, ''], None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(171) : TestBase.Check.Null([0, ""]) - in Null
+ [(), None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(172) : TestBase.Check.Null(()) - in Null
+ [(0, ''), None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(173) : TestBase.Check.Null((0, "")) - in Null
+ [{}, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(174) : TestBase.Check.Null({}) - in Null
+ [{0: ''}, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(175) : TestBase.Check.Null({0: ""}) - in Null
+![None, None] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(176) : TestBase.Check.Null(None, False) - in Null
+ [None, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(203) : TestBase.Check.String(None) - in String
+ [True, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(204) : TestBase.Check.String(True) - in String
+ [False, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(205) : TestBase.Check.String(False) - in String
+ [0, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(206) : TestBase.Check.String(0) - in String
+ [1, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(207) : TestBase.Check.String(1) - in String
+ ['None', ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(208) : TestBase.Check.String("None") - in String
+ ['True', ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(209) : TestBase.Check.String("True") - in String
+ ['False', ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(210) : TestBase.Check.String("False") - in String
+ ['0', ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(211) : TestBase.Check.String("0") - in String
+ ['1', ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(212) : TestBase.Check.String("1") - in String
+ ['a', ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(214) : TestBase.Check.String("a") - in String
+ [[], ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(215) : TestBase.Check.String([]) - in String
+ [[0, ''], ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(216) : TestBase.Check.String([0, ""]) - in String
+ [(), ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(217) : TestBase.Check.String(()) - in String
+ [(0, ''), ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(218) : TestBase.Check.String((0, "")) - in String
+ [{}, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(219) : TestBase.Check.String({}) - in String
+ [{0: ''}, ''] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(220) : TestBase.Check.String({0: ""}) - in String
+ [None, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(221) : TestBase.Check.String(None, "a") - in String
+ [True, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(222) : TestBase.Check.String(True, "a") - in String
+ [False, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(223) : TestBase.Check.String(False, "a") - in String
+ [0, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(224) : TestBase.Check.String(0, "a") - in String
+ [1, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(225) : TestBase.Check.String(1, "a") - in String
+ ['None', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(226) : TestBase.Check.String("None", "a") - in String
+ ['True', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(227) : TestBase.Check.String("True", "a") - in String
+ ['False', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(228) : TestBase.Check.String("False", "a") - in String
+ ['0', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(229) : TestBase.Check.String("0", "a") - in String
+ ['1', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(230) : TestBase.Check.String("1", "a") - in String
+ ['', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(231) : TestBase.Check.String("", "a") - in String
+ [[], '[]'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(233) : TestBase.Check.String([], "[]") - in String
+ [[0, ''], '[0, ""]'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(234) : TestBase.Check.String([0, ""], '[0, ""]') - in String
+ [(), '()'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(235) : TestBase.Check.String((), "()") - in String
+ [(0, ''), '(0, "")'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(236) : TestBase.Check.String((0, ""), '(0, "")') - in String
+ [{}, '{}'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(237) : TestBase.Check.String({}, "{}") - in String
+ [{0: ''}, '{0, ""}'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(238) : TestBase.Check.String({0: ""}, '{0, ""}') - in String
+![None, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(239) : TestBase.Check.String(None, "a", False) - in String
+![True, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(240) : TestBase.Check.String(True, "a", False) - in String
+![False, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(241) : TestBase.Check.String(False, "a", False) - in String
+![0, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(242) : TestBase.Check.String(0, "a", False) - in String
+![1, 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(243) : TestBase.Check.String(1, "a", False) - in String
+!['a', 'a'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(250) : TestBase.Check.String("a", "a", False) - in String
+![[], '[]'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(251) : TestBase.Check.String([], "[]", False) - in String
+![[0, ''], '[0, ""]'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(252) : TestBase.Check.String([0, ""], '[0, ""]', False) - in String
+![(), '()'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(253) : TestBase.Check.String((), "()", False) - in String
+![(0, ''), '(0, "")'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(254) : TestBase.Check.String((0, ""), '(0, "")', False) - in String
+![{}, '{}'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(255) : TestBase.Check.String({}, "{}", False) - in String
+![{0: ''}, '{0, ""}'] - C:\_home\#WorkingCopies\github\sawaizumi\simpl\python\modules\TestCase\Base.py(256) : TestBase.Check.String({0: ""}, '{0, ""}', False) - in String

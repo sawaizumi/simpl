@@ -1,0 +1,16 @@
+reset results...
+--------------------------------
+================================
+Count   : 7
+Failure : 2
+
+Total   : 0
+Error   : 3
+Warning : 5
+Notice  : 1
+
+--------------------------------
+{'Count': 7, 'Block.Count': 0, 'State': [False, True, True, True, None, False, True], 'Error': [{'Message': 'failed'}, {'Message': 'Error'}, {'Message': 'Error'}], 'Failure': 2, 'Warning': [{'Message': 'over state...'}, {'Message': 'over state...'}, {'Message': 'over state...'}, {'Message': 'no state...'}, {'Message': 'Warning'}], 'Notice': [{'Message': 'Notice'}]}
+--------------------------------
+
+completed.
