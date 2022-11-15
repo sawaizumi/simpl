@@ -3,9 +3,6 @@
 
 
 # import
-import os
-import sys
-
 import modules.SIMPL as SIMPL
 import modules.SIMPL.Tests.Base as TestBase
 

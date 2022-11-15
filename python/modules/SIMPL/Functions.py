@@ -202,57 +202,7 @@ def GetValue_Enum(aaValues, eString_Prefix, eValue, eValue_Default = 0, bFlag_Us
 
 
 def LoadConfigurations(eString_FullName):
-	aaConfigurations = {}
-
-	eString_File = pathlib.Path(eString_FullName).open("r", encoding = "utf-8").read()
-	eString_File = eString_File.replace("\r\n", "\n")
-	eString_File = eString_File.replace("\r", "\n")
-	arStrings_Line = eString_File.split("\n")
-	for eString_Line in arStrings_Line:
-		if eString_Line == "":
-			continue
-
-		if eString_Line[0] == "#":
-			continue
-
-		arStrings_Column = eString_Line.split("\t")
-		if len(arStrings_Column) == 0:
-			continue
-
-		if len(arStrings_Column) > 0:
-			eKey = arStrings_Column.pop(0)
-			if eKey == "":
-				continue
-
-			if eKey in aaConfigurations:
-				if not type(aaConfigurations[eKey]) == SIMPL.Defines.TYPE__LIST:
-					aaConfigurations[eKey] = [aaConfigurations[eKey]]
-
-				if len(arStrings_Column) == 0:
-					aaConfigurations[eKey].append(None)
-					continue
-
-				if len(arStrings_Column) == 1:
-					aaConfigurations[eKey].append(arStrings_Column[0])
-					continue
-
-				if not type(aaConfigurations[eKey][0]) == SIMPL.Defines.TYPE__LIST:
-					aaConfigurations[eKey] = [aaConfigurations[eKey]]
-
-				aaConfigurations[eKey].append(arStrings_Column)
-
-			else:
-				if len(arStrings_Column) == 0:
-					aaConfigurations[eKey] = None
-					continue
-
-				if len(arStrings_Column) == 1:
-					aaConfigurations[eKey] = arStrings_Column[0]
-					continue
-
-				aaConfigurations[eKey] = arStrings_Column
-
-	return aaConfigurations
+	return SIMPL.Configuration.GetConfigurations(LoadFile(eString_FullName))
 
 
 def LoadFile(eString_FullName):
@@ -300,6 +250,13 @@ def SaveJSON(eString_FullName, eJSON, Indent = None):
 	json.dump(eJSON, eFile, indent = Indent)
 
 	return
+
+
+def SetValue_Default(aaValues, eKey, eValue):
+	if not (eKey in aaValues):
+		aaValues[eKey] = eValue
+
+	return aaValues
 
 
 def Wait_FileCreate(eString_FullName, iTimeout):

@@ -2,9 +2,17 @@
 
 
 
+# global
+g_aaConfigurations = {}
+
+
+
 # import
+from . import Configuration
 from . import Defines
+from . import Excel
 from . import Functions
+from . import Log
 
 
 

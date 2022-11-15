@@ -5,6 +5,8 @@
 # import
 from . import _Base
 from . import Base
+from . import Configuration
+from . import Excel
 from . import Functions
 
 

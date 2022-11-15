@@ -33,6 +33,7 @@ def local_GetLevel_ShowResults(aaConfigurations):
 
 def main(arStrings_Argument):
 	aaConfigurations = SIMPL.Functions.LoadConfigurations(arStrings_Argument[1])
+	SIMPL.Log.SetConfigurations(aaConfigurations)
 
 	# 初期化
 	TestBase.ResetResults()
