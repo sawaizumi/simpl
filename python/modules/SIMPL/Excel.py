@@ -18,6 +18,8 @@ def Check(eString_FullName__A, eString_FullName__B, aaConfigurations = {}):
 	eBook__B = xlrd.open_workbook(eString_FullName__B)
 
 	if eBook__A.nsheets != eBook__B.nsheets:
+		SIMPL.Log.OutputSIMPL(["!Sheets", eBook__A.nsheets, eBook__B.nsheets])
+
 		return False
 
 	for i in range(eBook__A.nsheets):

@@ -78,6 +78,12 @@ def Check(aaConfigurations):
 	bReslut = SIMPL.Excel.Check(eString_FileName__A, eString_FileName__B, aaConfigurations_Excel)
 	TestBase.Check.Boolean(bReslut, False)
 
+	eString_FileName__A = SIMPL.Functions.GetValue(aaConfigurations, "Excel.File.Sheets")
+	aaOptions = {}
+	aaConfigurations_Excel = SIMPL.Configuration.ExtractConfigurations(aaConfigurations, "Excel", aaOptions)
+	bReslut = SIMPL.Excel.Check(eString_FileName__A, eString_FileName__B, aaConfigurations_Excel)
+	TestBase.Check.Boolean(bReslut, False)
+
 	eString_FileName__A = SIMPL.Functions.GetValue(aaConfigurations, "Excel.File.SheetName")
 	aaOptions = {}
 	aaConfigurations_Excel = SIMPL.Configuration.ExtractConfigurations(aaConfigurations, "Excel", aaOptions)
@@ -91,6 +97,12 @@ def Check(aaConfigurations):
 	TestBase.Check.Boolean(bReslut, False)
 
 	eString_FileName__A = SIMPL.Functions.GetValue(aaConfigurations, "Excel.File.Columns")
+	aaOptions = {}
+	aaConfigurations_Excel = SIMPL.Configuration.ExtractConfigurations(aaConfigurations, "Excel", aaOptions)
+	bReslut = SIMPL.Excel.Check(eString_FileName__A, eString_FileName__B, aaConfigurations_Excel)
+	TestBase.Check.Boolean(bReslut, False)
+
+	eString_FileName__A = SIMPL.Functions.GetValue(aaConfigurations, "Excel.File.Value")
 	aaOptions = {}
 	aaConfigurations_Excel = SIMPL.Configuration.ExtractConfigurations(aaConfigurations, "Excel", aaOptions)
 	bReslut = SIMPL.Excel.Check(eString_FileName__A, eString_FileName__B, aaConfigurations_Excel)
