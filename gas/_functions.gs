@@ -28,6 +28,16 @@ __base._FUNCTIONS =
 	// ---------------------------------------------------------------
 	// public
 
+	BuildArray_Line : 
+		function ( eString )
+		{
+			eString = eString.replace( "\r\n", "\n" );
+			eString = eString.replace( "\r", "\n" );
+
+			return eString.split( "\n" );
+		},
+
+
 	BuildArray_Unique : 
 		function ( arStrings )
 		{

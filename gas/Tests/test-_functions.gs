@@ -42,6 +42,7 @@ TEST.SIMPL._FUNCTIONS =
 	Check_OK : 
 		function ()
 		{
+			this.BuildArray_Line();
 			this.BuildArray_Unique();
 			this.BuildArray_Unique__SmallArray();
 			this.BuildAssociativeArray_Indexed();
@@ -74,6 +75,39 @@ TEST.SIMPL._FUNCTIONS =
 
 	// ---------------------------------------------------------------
 	// private
+
+	BuildArray_Line : 
+		function ()
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( eString )",
+"subject"   : "文字列の行単位での配列化",
+"arguments" : [ { "string" : "文字列" } ],
+"return"    : { "array" : "" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"sample"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.BuildArray_Line( "1\r\n2\r3\n4\n" ), [ "1", "2", "3", "4", "" ] );
+			SIMPL.TEST.Check.Array( SIMPL._FUNCTIONS.BuildArray_Line( "1\r\n2\r3\n4\n5" ), [ "1", "2", "3", "4", "5" ] );
+		},
+
 
 	BuildArray_Unique : 
 		function ()

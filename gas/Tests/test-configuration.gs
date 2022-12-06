@@ -42,6 +42,7 @@ TEST.SIMPL.CONFIGURATION =
 	Check_OK : 
 		function ( aaConfigurations )
 		{
+			this.BuildConfigurations( aaConfigurations );
 			this.ExtractConfigurations( aaConfigurations );
 			this.GetConfigurations( aaConfigurations );
 			this.SetConfigurations( aaConfigurations );
@@ -56,6 +57,40 @@ TEST.SIMPL.CONFIGURATION =
 
 	// ---------------------------------------------------------------
 	// private
+
+	BuildConfigurations : 
+		function ( aaConfigurations )
+		{
+			var aaDescriptions = 
+				{
+"function"  : "( arStrings_Line )",
+"subject"   : "設定の文字列からの構築",
+"arguments" : [ { "array" : "" } ],
+"return"    : { "assoc" : "設定" },
+
+"summary"   : 
+	[
+		"",
+		""
+	],
+"check"     : 
+	[
+		"",
+		""
+	]
+				};
+			SIMPL.TEST.AddDescriptions( aaDescriptions );
+
+			var aaResults;
+			var aaConfigurations_File = SIMPL.CONFIGURATION.ExtractConfigurations( aaConfigurations, "test-configuration.BuildConfigurations", { "Cut.Prefix" : true } );
+			var eFile = SIMPL.GAS.GD.GetFile( aaConfigurations_File["file.id"] );
+			var arStrings_Line = SIMPL._FUNCTIONS.BuildArray_Line( eFile.getBlob().getDataAsString() );
+			var eString_JSON = arStrings_Line[1].replace( "# JSON = ", "" );
+			var aaJSON = JSON.parse( eString_JSON );
+			aaResults = SIMPL.CONFIGURATION.BuildConfigurations( arStrings_Line );
+			SIMPL.TEST.Check.AssociativeArray( aaResults, aaJSON );
+		},
+
 
 	ExtractConfigurations : 
 		function ( aaConfigurations )
