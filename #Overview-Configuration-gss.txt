@@ -1,0 +1,106 @@
+/* ===================================================================
+Subject : 概要(Google SpreadSheet設定ファイル)
+Author  : SAWA, Izumi
+=================================================================== */
+// 日本語UTF-8, LF, Tab=4
+
+
+
+●基本的な動作仕様
+1. キーとサブキーを各列に左から順に並べる
+key	sub-key1	sub-key2	sub-key3	sub-key4	value
+
+key.sub-key1.sub-key2.sub-key3.sub-key4:'value'
+
+
+2. オプション設定は以下の通り
+null_break : [ false ]
+head.row : [ 1 ], 1 ～
+head.column : [ 1 ], 1 ～
+offset.row : [ 0 ], 0 ～
+offset.column : [ 0 ], 0 ～
+column-names : [ <各項目(キー・値・備考)の列名( 'key', 'value', 'remarks' )> ]
+column-order.key : [ <キーの列名('key')が設定された列番号> ], 1 ～
+column-order.value : [ <値の列名('value')が設定された列番号> ], 1 ～
+
+
+2. 取得シート情報のオプション設定は以下の通り
+sheet.id : [ <Google SpreadSheetのID> ]
+sheet.sheet-name : [ 'configurations' ]
+
+
+3. 設定の取り込み範囲は以下の通り
+( left, top ) - ( right, bottom )
+left = head.column + offset.column
+top = head.row + offset.row
+right = <最大列数> - ( head.column + offset.column )
+bottom = <最大行数> - ( head.row + offset.row )
+
+
+3. [null_break]がtrueだったらキーが空文字列だった場合に取り込みを終了
+
+
+4. サブキーの数はキーと値の列がどの位置にあるかによって決まる
+
+
+4. 値がキーより右の場合はサブキー数は<キーと値の間の列数>
+key	value
+key	sub-key1	value
+key	sub-key1	sub-key2	value
+
+key:'value'
+key.sub-key1:'value'
+key.sub-key1.sub-key2:'value'
+
+
+4. 値がキーより左の場合はサブキー数は0
+value	key	sub-key1	sub-key2	sub-key3	sub-key4
+value	sub-key1	sub-key2	sub-key3	sub-key4	key
+
+key:'value'
+key:'value'
+
+
+5. 値はセルの暗黙的な変換に従って型が決まる
+a	1
+b	2.3
+c	4d
+e	false
+f	
+
+a:1(int)
+b:2.3(float)
+c:'4d'
+e:false(boolean)
+f:''
+
+
+6. 同じキーがあれば値は自動的に配列化
+x	
+x	y
+x	z
+x	true
+x	0
+x	1.2
+
+x:[ '', 'y', 'z', true, 0, 1.2 ]
+
+
+7. 仕様としてのコメントアウトはない
+(ただキーの先頭に#を入れたら別のキーとなるので実質的に同様の動作が可能)
+a	1
+#a	2
+#a	3
+
+a:1
+#a:[ 2, 3 ]
+
+#a	1
+a	2
+#a	3
+
+a:2
+#a:[ 1, 3 ]
+
+
+
